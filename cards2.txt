@@ -1,0 +1,23 @@
+ClayPit Resource ClayClay 1 3 null null CardsAge2\ClayPit.jpg
+Foundry Resource OreOre 1 3 null null CardsAge2\Foundry.jpg
+Sawmill Resource WoodWood 1 3 null null CardsAge2\Sawmill.jpg
+StonePit Resource StoneStone 1 3 null null CardsAge2\StonePit.jpg
+GlassWorks Good Glass 0 3 null null CardsAge2\GlassWorks.jpg
+Loom Good Cloth 0 3 null null CardsAge2\Loom.jpg
+Press Good Paper 0 3 null null CardsAge2\Press.jpg
+Aqueduct Culture 5 SSS 3 null null CardsAge2\Aqueduct.jpg
+Court Culture 4 ZZC 3 null null CardsAge2\Court.jpg
+Monument Culture 4 OOW 3 Gardens null CardsAge2\Monument.jpg
+Temple Culture 3 WZG 3 Pantheon null CardsAge2\Temple.jpg
+Ambulatory Science Math OOG 3 Osier Arena CardsAge2\Ambulatory.jpg
+Laboratory Science Mechanics ZZP 3 Observatory SiegeMachineries CardsAge2\Laboratory.jpg
+Library Science Scripture SSZ 3 Senate University CardsAge2\Library.jpg
+School Science Scripture WP 3 Academy Workshop CardsAge2\School.jpg
+ArcheryTrack Army 2 WWO 3 null null CardsAge2\ArcheryTrack.jpg
+Stables Army 2 ZWO 3 null null CardsAge2\Stables.jpg
+Walls Army 2 SSS 3 Strengthening null CardsAge2\Walls.jpg
+Caravanserai Trade ResourceProduction WW 3 Lighthouse null CardsAge2\Caravanserai.jpg
+Marketplace Trade GoodProduction ZZ 3 Port null CardsAge2\Marketplace.jpg
+Vineyard Trade ResourceMoney 0 3 null null CardsAge2\Vineyard.jpg
+
+
