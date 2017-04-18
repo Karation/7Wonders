@@ -16,25 +16,26 @@ import java.util.List;
 public class Main {
     InitialGui initialGui;
     Deck deck;
+    Board board;
     ArrayList<ArrayList<Wonders>> wonders;
     ArrayList<Wonders> wonderSides;
     List<WonderChoiceThread> threads = new ArrayList<>();
     ArrayList<Wonders> chosenWonders=new ArrayList<>();
-    ArrayList<Player> players = new ArrayList<>();
+    ArrayList<Player> players= new ArrayList<>();
     String filepath = "cards1.txt";
+    int numOfPlayers =3 ;
     public static void main(String[] args) throws IOException, InterruptedException {
         new Main().start();
     }
 
     public void start() throws IOException, InterruptedException {
         deck = new Deck();
-        Board board=deck.dealCards(deck.shuffle(deck.loadCards(filepath)),3);
+        createBoardAndPlayers();
+        deck.dealCards(deck.shuffle(deck.loadCards(filepath)), players);
         wonders= Wonders.addWondersToArray();
         wonders=Wonders.shuffleWonders(wonders);
         for (int i = 0; i < 3; i++) {
             wonderSides=Wonders.dealWonders(wonders);
-            Player player=board.getPlayer(i);
-            players.add(player);
             WonderChoiceThread thread = new WonderChoiceThread(wonderSides, chosenWonders);
             thread.start();
             threads.add(thread);
@@ -55,5 +56,13 @@ public class Main {
             Player player=players.get(i);
             initialGui = new InitialGui(player, player.getCardsInHand(), player.getWonder());
         }
+    }
+
+    private void createBoardAndPlayers() {
+        for (int i = 0; i < numOfPlayers; i++) {
+            Player player = new Player();
+            players.add(player);
+        }
+        board = new Board(players);
     }
 }

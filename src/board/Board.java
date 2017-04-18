@@ -253,9 +253,17 @@ public class Board {
         this.resoveArmyEffects(players);
 
         try {
-            deck.dealCards(deck.shuffle(deck.loadCards(filepath2)), 3);
+            deck=new Deck();
+            deck.dealCards(deck.shuffle(deck.loadCards(filepath2)), players);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        for (Player player : players) {
+            try {
+                player.nextAge();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

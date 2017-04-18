@@ -55,8 +55,7 @@ public class Player {
     boolean usedBuildForFreeEffect = false;
 
 
-    public Player(ArrayList<Card> cardsInHand) {
-        this.cardsInHand = cardsInHand;
+    public Player() {
     }
 
     public PlayerPanel start(JLabel backgroundPanel, GridBagConstraints constraints, ArrayList<Card> cards, Wonders wonder) throws IOException {
@@ -78,6 +77,15 @@ public class Player {
         playerPanel.add(cardsPanel, constraints);
         backgroundPanel.paintAll(backgroundPanel.getGraphics());
 
+    }
+    public void nextAge() throws IOException{
+        CardsPanel cardsPanel;
+        playerPanel.remove(playerPanel.getCardsPanel());
+        cardsPanel = new CardsPanel(this.getCardsInHand(), this);
+        constraints.gridy = 1;
+        playerPanel.setCardsPanel(cardsPanel);
+        playerPanel.add(cardsPanel, constraints);
+        backgroundPanel.paintAll(backgroundPanel.getGraphics());
     }
 
 
@@ -234,11 +242,7 @@ public class Player {
 
     private Boolean checkIfEnoughMoney(String s) {
         int money = this.getMoney();
-        if (money < 1) {
-            return false;
-        } else {
-            return true;
-        }
+        return money >= 1;
     }
 
     public boolean findInResourceEffectsArray(String effect) {

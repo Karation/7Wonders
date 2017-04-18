@@ -22,12 +22,10 @@ public class Deck {
         return cards;
     }
 
-    public Board dealCards(ArrayList<Card> shuffledDeck, int numberOfPlayers) {
-        ArrayList<Player> players = new ArrayList<>();
+    public void dealCards(ArrayList<Card> shuffledDeck, ArrayList<Player> players) {
         int cardCount=0;
-        Player player;
         while (cardCount<shuffledDeck.size()) {
-            for (int j = 0; j < numberOfPlayers; j++) {
+            for (int j = 0; j < players.size(); j++) {
                 ArrayList<Card> cardsInHand = new ArrayList<>();
                 int current = 0;
                 while(current< Player.MAX_CARDS_IN_HAND){
@@ -35,9 +33,7 @@ public class Deck {
                     cardCount++;
                     current++;
                 }
-
-                player=new Player(cardsInHand);
-                players.add(player);
+                players.get(j).setCardsInHand(cardsInHand);
             }
         }
         for (int i = 0; i <players.size() ; i++) {
@@ -49,8 +45,6 @@ public class Deck {
             players.get(i).setLeftPlayer(leftPlayer);
             players.get(i).setRightPlayer(rightPlayer);
         }
-        Board board = new Board(players);
-        return board;
     }
 
     public ArrayList<Card> loadCards(String filepath) throws IOException {
