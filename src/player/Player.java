@@ -15,13 +15,13 @@ import java.util.ArrayList;
 
 public class Player {
     public final static int MAX_CARDS_IN_HAND = 7;
-    public final static int STARTING_MONEY = 3;
-    public ArrayList<Card> cardsInHand = new ArrayList<>();
-    public ArrayList<Card> copiedCardsInHand = new ArrayList<>();
-    public ArrayList<Effect> copiedResourceEffects = new ArrayList<>();
-    public ArrayList<Effect> copiedGoodEffects = new ArrayList<>();
-    public ArrayList<Effect> copiedBoughtResourceEffects = new ArrayList<>();
-    public ArrayList<Effect> copiedBoughtGoodEffects = new ArrayList<>();
+    private final static int STARTING_MONEY = 3;
+    private ArrayList<Card> cardsInHand = new ArrayList<>();
+    private ArrayList<Card> copiedCardsInHand = new ArrayList<>();
+    private ArrayList<Effect> copiedResourceEffects = new ArrayList<>();
+    private ArrayList<Effect> copiedGoodEffects = new ArrayList<>();
+    private ArrayList<Effect> copiedBoughtResourceEffects = new ArrayList<>();
+    private ArrayList<Effect> copiedBoughtGoodEffects = new ArrayList<>();
     private ArrayList<Effect> copiedTradeEffects = new ArrayList<>();
 
     private Wonders wonder;
@@ -148,7 +148,7 @@ public class Player {
 
     }
 
-    public void clearAllCopiedEffectArrays() {
+    private void clearAllCopiedEffectArrays() {
         copiedBoughtResourceEffects=new ArrayList<>();
         copiedBoughtGoodEffects=new ArrayList<>();
         copiedGoodEffects=new ArrayList<>();
@@ -178,7 +178,7 @@ public class Player {
         return rightPlayer;
     }
 
-    public void refreshCopiedGoodsAndResources() {
+    private void refreshCopiedGoodsAndResources() {
 
         copiedResourceEffects.addAll(resourceEffects);
         copiedGoodEffects.addAll(goodEffects);
@@ -189,7 +189,7 @@ public class Player {
 
     }
 
-    public void refreshGoodsResourcesAndTradeEffects() {
+    private void refreshGoodsResourcesAndTradeEffects() {
         resourceEffects=new ArrayList<>();
         goodEffects=new ArrayList<>();
         boughtGoodEffects=new ArrayList<>();
@@ -202,9 +202,9 @@ public class Player {
 
         tradeEffects.addAll(copiedTradeEffects);
 
-        for (int i = 0; i < resourceEffects.size(); i++) {
-            if (resourceEffects.get(i) instanceof DoubleResourceEffect){
-                ((DoubleResourceEffect) resourceEffects.get(i)).setNumberOfResources(2);
+        for (Effect resourceEffect : resourceEffects) {
+            if (resourceEffect instanceof DoubleResourceEffect) {
+                ((DoubleResourceEffect) resourceEffect).setNumberOfResources(2);
             }
         }
     }
@@ -250,7 +250,7 @@ public class Player {
         return money >= 1;
     }
 
-    public boolean findInResourceEffectsArray(String effect) {
+    private boolean findInResourceEffectsArray(String effect) {
 
         for (int i = 0; i < resourceEffects.size(); i++) {
             if (resourceEffects.get(i) instanceof ResourceEffect) {
@@ -313,7 +313,7 @@ public class Player {
         return false;
     }
 
-    public boolean findInGoodEffectsArray(String effect) {
+    private boolean findInGoodEffectsArray(String effect) {
         for (int i = 0; i < goodEffects.size(); i++) {
             GoodEffect good = (GoodEffect) goodEffects.get(i);
             if (good.getGoodType().equals(effect)) {
