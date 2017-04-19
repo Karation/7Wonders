@@ -22,4 +22,12 @@ public class Trade extends Card{
     public Effect getTradeEffect() {
         return tradeEffect;
     }
+
+    public String getCanBuild() {
+        return canBuild;
+    }
+
+    public void setCanBuild(String canBuild) {
+        this.canBuild = canBuild;
+    }
 }

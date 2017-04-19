@@ -43,7 +43,16 @@ public class BuyPanel extends JPanel{
                                 "Buying Warning",
                                 JOptionPane.WARNING_MESSAGE);
                     }else {
-                        buyComboBox.removeElement(buyComboBox.getSelectedIndex());
+                        if (resourceOrGoodEffect instanceof DoubleResourceEffect){
+                            DoubleResourceEffect doubleResourceEffect = (DoubleResourceEffect) resourceOrGoodEffect;
+                            if (doubleResourceEffect.getNumberOfResources() == 2){
+                                doubleResourceEffect.setNumberOfResources(1);
+                            }else{
+                                buyComboBox.removeElement(buyComboBox.getSelectedIndex());
+                            }
+                        }else{
+                            buyComboBox.removeElement(buyComboBox.getSelectedIndex());
+                        }
                         updatePlayer(player, playerMoney, moneyToPay, resourceOrGoodEffect);
                         opponent.payOpponentForBoughtItem(moneyToPay);
 
@@ -98,7 +107,7 @@ public class BuyPanel extends JPanel{
         player.setMoney(playerMoney);
         player.getPlayerPanel().getWonderPanel().getBuildingsPanel().updateMoneyIcon(playerMoney);
 
-        if (resourceOrGoodEffect instanceof ResourceEffect||resourceOrGoodEffect instanceof MixedResourceEffect){
+        if (resourceOrGoodEffect instanceof ResourceEffect||resourceOrGoodEffect instanceof MixedResourceEffect||resourceOrGoodEffect instanceof DoubleResourceEffect){
             boughtResourceEffects.add(resourceOrGoodEffect);
             player.setBoughtResourceEffects(boughtResourceEffects);
         }else if(resourceOrGoodEffect instanceof GoodEffect){

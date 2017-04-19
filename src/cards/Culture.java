@@ -22,4 +22,12 @@ public class Culture extends Card{
     public Effect getCultureEffect() {
         return cultureEffect;
     }
+
+    public String getCanBuild() {
+        return canBuild;
+    }
+
+    public void setCanBuild(String canBuild) {
+        this.canBuild = canBuild;
+    }
 }

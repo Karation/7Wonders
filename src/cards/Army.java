@@ -22,4 +22,12 @@ public class Army extends Card{
     public Effect getArmyEffect() {
         return armyEffect;
     }
+
+    public String getCanBuild() {
+        return canBuild;
+    }
+
+    public void setCanBuild(String canBuild) {
+        this.canBuild = canBuild;
+    }
 }

@@ -22,4 +22,20 @@ public class Science extends Card{
     public Effect getScienceEffect() {
         return scienceEffect;
     }
+
+    public String getCanBuild() {
+        return canBuild;
+    }
+
+    public void setCanBuild(String canBuild) {
+        this.canBuild = canBuild;
+    }
+
+    public String getCanBuild2() {
+        return canBuild2;
+    }
+
+    public void setCanBuild2(String canBuild2) {
+        this.canBuild2 = canBuild2;
+    }
 }

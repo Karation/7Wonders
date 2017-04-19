@@ -4,6 +4,7 @@ import cards.Good;
 import cards.Trade;
 import gui.oponentsPanel.LeftOponentPanel;
 import gui.oponentsPanel.RightOponentPanel;
+import player.Player;
 
 import javax.swing.*;
 
@@ -28,7 +29,7 @@ public class TradeEffect extends Effect{
 
         switch (emblemName){
             case "WestTrade":
-                if ((resourceOrGood instanceof ResourceEffect ||resourceOrGood instanceof MixedResourceEffect) && opponentPanel instanceof LeftOponentPanel){
+                if ((resourceOrGood instanceof ResourceEffect ||resourceOrGood instanceof MixedResourceEffect || resourceOrGood instanceof DoubleResourceEffect) && opponentPanel instanceof LeftOponentPanel){
                     moneyToPay=1;
                     return moneyToPay;
                 }else {
@@ -36,7 +37,7 @@ public class TradeEffect extends Effect{
                     return moneyToPay;
                 }
             case "EastTrade":
-                if ((resourceOrGood instanceof ResourceEffect || resourceOrGood instanceof MixedResourceEffect) && opponentPanel instanceof RightOponentPanel){
+                if ((resourceOrGood instanceof ResourceEffect || resourceOrGood instanceof MixedResourceEffect || resourceOrGood instanceof DoubleResourceEffect) && opponentPanel instanceof RightOponentPanel){
                     moneyToPay=1;
                     return moneyToPay;
                 }else{
@@ -44,7 +45,7 @@ public class TradeEffect extends Effect{
                     return moneyToPay;
                 }
             case "ResourceTrade":
-                if((resourceOrGood instanceof ResourceEffect || resourceOrGood instanceof MixedResourceEffect) && (opponentPanel instanceof RightOponentPanel || opponentPanel instanceof LeftOponentPanel)){
+                if((resourceOrGood instanceof ResourceEffect || resourceOrGood instanceof MixedResourceEffect || resourceOrGood instanceof DoubleResourceEffect) && (opponentPanel instanceof RightOponentPanel || opponentPanel instanceof LeftOponentPanel)){
                     moneyToPay=1;
                     return moneyToPay;
                 }
@@ -59,5 +60,13 @@ public class TradeEffect extends Effect{
         }
         moneyToPay=2;
         return moneyToPay;
+    }
+    public int resolveMoneyResourceEffect(Player player){
+        int numOfResourceCards;
+        Player leftOpponent = player.getLeftPlayer();
+        Player rightOpponent = player.getRightPlayer();
+
+        return numOfResourceCards=leftOpponent.getResourceEffects().size()+rightOpponent.getResourceEffects().size() + player.getResourceEffects().size();
+
     }
 }

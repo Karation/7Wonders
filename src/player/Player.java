@@ -52,7 +52,7 @@ public class Player {
     private GridBagConstraints constraints;
     private OpponentPanel opponentPanel;
 
-    boolean usedBuildForFreeEffect = false;
+    private boolean usedBuildForFreeEffect = false;
 
 
     public Player() {
@@ -202,6 +202,11 @@ public class Player {
 
         tradeEffects.addAll(copiedTradeEffects);
 
+        for (int i = 0; i < resourceEffects.size(); i++) {
+            if (resourceEffects.get(i) instanceof DoubleResourceEffect){
+                ((DoubleResourceEffect) resourceEffects.get(i)).setNumberOfResources(2);
+            }
+        }
     }
 
     public ArrayList<Boolean> checkIfCanBuild(Card card, WonderStage wonderStage) {
@@ -254,6 +259,18 @@ public class Player {
                     resourceEffects.remove(i);
                     return true;
                 }
+                //dodane
+            }else if(resourceEffects.get(i) instanceof DoubleResourceEffect){
+                DoubleResourceEffect doubleResource = (DoubleResourceEffect) resourceEffects.get(i);
+                if (doubleResource.getResourceType().equals(effect)){
+                    if(doubleResource.getNumberOfResources()==2){
+                        doubleResource.setNumberOfResources(1);
+                        return true;
+                    }else{
+                        resourceEffects.remove(i);
+                        return true;
+                    }
+                }
             } else if (resourceEffects.get(i) instanceof MixedResourceEffect) {
                 MixedResourceEffect mixedResource = (MixedResourceEffect) resourceEffects.get(i);
                 if (mixedResource.getResourceType1().equals(effect) || mixedResource.getResourceType2().equals(effect)) {
@@ -270,7 +287,14 @@ public class Player {
                     boughtResourceEffects.remove(i);
                     return true;
                 }
-            } else if (boughtResourceEffects.get(i) instanceof MixedResourceEffect) {
+            } else if (boughtResourceEffects.get(i) instanceof DoubleResourceEffect){
+                DoubleResourceEffect doubleResourceEffect = (DoubleResourceEffect) boughtResourceEffects.get(i);
+                if (doubleResourceEffect.getResourceType().equals(effect)){
+                    boughtResourceEffects.remove(i);
+                    return true;
+                }
+            }
+            else if (boughtResourceEffects.get(i) instanceof MixedResourceEffect) {
                 MixedResourceEffect mixedResource = (MixedResourceEffect) boughtResourceEffects.get(i);
                 if (mixedResource.getResourceType1().equals(effect) || mixedResource.getResourceType2().equals(effect)) {
                     boughtResourceEffects.remove(i);
@@ -306,7 +330,7 @@ public class Player {
         }
         for (int i = 0; i < tradeEffects.size(); i++) {
             TradeEffect good = (TradeEffect) tradeEffects.get(i);
-            if (tradeEffects.get(i).equals("GoodProduction")){
+            if (good.getEmblem().equals("GoodProduction")){
                 tradeEffects.remove(i);
                 return true;
             }
@@ -544,5 +568,13 @@ public class Player {
 
     public void setUsedBuildForFreeEffect(boolean usedBuildForFreeEffect) {
         this.usedBuildForFreeEffect = usedBuildForFreeEffect;
+    }
+
+    public ArrayList<String> getCanBuildArray() {
+        return canBuild;
+    }
+
+    public void setCanBuildArray(ArrayList<String> canBuild) {
+        this.canBuild = canBuild;
     }
 }

@@ -17,7 +17,7 @@ ArcheryTrack Army 2 WWO 3 null null CardsAge2\ArcheryTrack.jpg
 Stables Army 2 ZWO 3 null null CardsAge2\Stables.jpg
 Walls Army 2 SSS 3 Strengthening null CardsAge2\Walls.jpg
 Caravanserai Trade ResourceProduction WW 3 Lighthouse null CardsAge2\Caravanserai.jpg
-Marketplace Trade GoodProduction ZZ 3 Port null CardsAge2\Marketplace.jpg
+Market Trade GoodProduction ZZ 3 Port null CardsAge2\Market.jpg
 Vineyard Trade ResourceMoney 0 3 null null CardsAge2\Vineyard.jpg
 
 

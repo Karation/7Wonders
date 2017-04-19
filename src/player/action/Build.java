@@ -44,7 +44,16 @@ public class Build  implements Action{
                     money-=amount;
                     buildingsPanel.updateMoneyIcon(money);
                     player.setMoney(money);
-                }else{
+                }else if (resource.getResourceEffect()instanceof DoubleResourceEffect){
+                    DoubleResourceEffect doubleResourceEffect = (DoubleResourceEffect) resource.getResourceEffect();
+                    resourceName = doubleResourceEffect.getEffectName();
+                    player.addEffect(type, doubleResourceEffect);
+                    int amount=Integer.parseInt(resource.getPrice());
+                    money-=amount;
+                    buildingsPanel.updateMoneyIcon(money);
+                    player.setMoney(money);
+                }
+                else{
                     ResourceEffect resourceEffect  = (ResourceEffect) resource.getResourceEffect();
                     resourceName=resourceEffect.getResourceType();
                     player.addEffect(type, resourceEffect);
@@ -68,6 +77,10 @@ public class Build  implements Action{
                 buildingsPanel.addArmyPoints(numOfShields, army);
 
                 player.addEffect(type, armyEffect);
+
+                if (army.getCanBuild()!=null){
+                    player.getCanBuildArray().add(army.getCanBuild());
+                }
                 break;
             case "Culture":
                 Culture culture = (Culture) card;
@@ -76,6 +89,10 @@ public class Build  implements Action{
                 buildingsPanel.addCulturePoints(numOfPoints, culture);
 
                 player.addEffect(type, cultureEffect);
+
+                if (culture.getCanBuild()!=null){
+                    player.getCanBuildArray().add(culture.getCanBuild());
+                }
                 break;
             case "Science":
                 Science science = (Science) card;
@@ -85,6 +102,11 @@ public class Build  implements Action{
                 backgroundPanel.paintAll(backgroundPanel.getGraphics());
 
                 player.addEffect(type, scienceEffect);
+
+                if (science.getCanBuild()!=null && science.getCanBuild2()!=null){
+                    player.getCanBuildArray().add(science.getCanBuild());
+                    player.getCanBuildArray().add(science.getCanBuild2());
+                }
                 break;
             case "Trade":
                 Trade trade = (Trade) card;
@@ -93,7 +115,16 @@ public class Build  implements Action{
                 tradePanel.addTradeIcon(emblem, trade);
                 backgroundPanel.paintAll(backgroundPanel.getGraphics());
 
+                //poprawic
+                if (tradeEffect.getEmblem().equals("ResourceMoney")){
+                    money += tradeEffect.resolveMoneyResourceEffect(player);
+                    player.setMoney(money);
+                }
                 player.addEffect(type, tradeEffect);
+
+                if (trade.getCanBuild()!=null){
+                    player.getCanBuildArray().add(trade.getCanBuild());
+                }
                 break;
         }
         if (player.getCardsInHand().size()!=0) {

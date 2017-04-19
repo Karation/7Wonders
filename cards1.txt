@@ -9,8 +9,8 @@ Press Good Paper 0 3 null null CardsAge1\Press.jpg
 Glassworks Good Glass 0 3 null null CardsAge1\Glassworks.jpg
 Therms Culture 3 S 3 Aqueduct null CardsAge1\Therms.jpg
 Altar Culture 2 0 3 Temple null CardsAge1\Altar.jpg
-Theatre Culture 2 0 3 Statue null CardsAge1\Theatre.jpg
-Pharmacy Science Math C 3 Stable Dispensary CardsAge1\Pharmacy.jpg
+Theatre Culture 2 0 3 Monument null CardsAge1\Theatre.jpg
+Pharmacy Science Math C 3 Stables Ambulatory CardsAge1\Pharmacy.jpg
 Scriptorium Science Scripture P 3 Court Library CardsAge1\Scriptorium.jpg
 Workshop Science Mechanics G 3 Laboratory ArcheryTrack CardsAge1\Workshop.jpg
 EastTrade Trade EastTrade 0 3 Market null CardsAge1\EastTrade.jpg

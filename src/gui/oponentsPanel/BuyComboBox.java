@@ -1,9 +1,6 @@
 package gui.oponentsPanel;
 
-import effects.Effect;
-import effects.GoodEffect;
-import effects.MixedResourceEffect;
-import effects.ResourceEffect;
+import effects.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +21,9 @@ public class BuyComboBox extends JComboBox{
                 effectStrings[i]=((GoodEffect) effects.get(i)).getGoodType();
             else if(effects.get(i) instanceof MixedResourceEffect)
                 effectStrings[i]=((MixedResourceEffect) effects.get(i)).getEffectName();
+            else if(effects.get(i) instanceof DoubleResourceEffect){
+                effectStrings[i]=((DoubleResourceEffect) effects.get(i)).getEffectName();
+            }
         }
         images = new ImageIcon[effectStrings.length];
         for (int i = 0; i < effectStrings.length; i++) {

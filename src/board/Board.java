@@ -147,6 +147,10 @@ public class Board {
                     MixedResourceEffect mixedResourceEffect = (MixedResourceEffect) resource.getResourceEffect();
                     resourceName = mixedResourceEffect.getEffectName();
                     opponentsBuildingPanel.substractMoney(1);
+                } else if(resource.getResourceEffect() instanceof DoubleResourceEffect){
+                    DoubleResourceEffect doubleResourceEffect = (DoubleResourceEffect) resource.getResourceEffect();
+                    resourceName = doubleResourceEffect.getEffectName();
+                    opponentsBuildingPanel.substractMoney(1);
                 } else {
                     ResourceEffect resourceEffect = (ResourceEffect) resource.getResourceEffect();
                     resourceName = resourceEffect.getResourceType();

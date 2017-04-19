@@ -32,6 +32,15 @@ public class Main {
         deck = new Deck();
         createBoardAndPlayers();
         deck.dealCards(deck.shuffle(deck.loadCards(filepath)), players);
+        dealAndChooseWonders();
+
+        for(int i = 0; i < 3; i++){
+            Player player=players.get(i);
+            initialGui = new InitialGui(player, player.getCardsInHand(), player.getWonder());
+        }
+    }
+
+    private void dealAndChooseWonders() throws InterruptedException {
         wonders= Wonders.addWondersToArray();
         wonders=Wonders.shuffleWonders(wonders);
         for (int i = 0; i < 3; i++) {
@@ -51,10 +60,6 @@ public class Main {
             Wonders wonder=chosenWonders.get(i);
             player.setWonder(wonder);
 
-        }
-        for(int i = 0; i < 3; i++){
-            Player player=players.get(i);
-            initialGui = new InitialGui(player, player.getCardsInHand(), player.getWonder());
         }
     }
 

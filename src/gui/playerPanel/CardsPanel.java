@@ -135,17 +135,34 @@ public class CardsPanel extends JPanel {
     }
 
     private void buildCase(Player player, ArrayList<Card> cards, int x) {
-        Set<Boolean> checkedIfCanBuildBuilding = new HashSet<>(player.checkIfCanBuild(cards.get(x), null));
-        if (checkedIfCanBuildBuilding.contains(false)) {
-            JOptionPane.showMessageDialog(CardsPanel.this,
-                    "Cant Build, no required resources",
-                    "Building warning",
-                    JOptionPane.WARNING_MESSAGE);
-        } else {
+        boolean canBuildFromCard = checkIfCanBuildFromCard(player, cards.get(x));
+        if (canBuildFromCard){
             player.setAction(new Build(cards.get(x), false));
             didChoose = true;
             acceptButton.setEnabled(true);
+        } else {
+            Set<Boolean> checkedIfCanBuildBuilding = new HashSet<>(player.checkIfCanBuild(cards.get(x), null));
+            if (checkedIfCanBuildBuilding.contains(false)) {
+                JOptionPane.showMessageDialog(CardsPanel.this,
+                        "Cant Build, no required resources",
+                        "Building warning",
+                        JOptionPane.WARNING_MESSAGE);
+            } else {
+                player.setAction(new Build(cards.get(x), false));
+                didChoose = true;
+                acceptButton.setEnabled(true);
+            }
         }
+    }
+
+    private boolean checkIfCanBuildFromCard(Player player, Card card) {
+        ArrayList<String> canBuild = player.getCanBuildArray();
+        for (int i = 0; i < canBuild.size(); i++) {
+            if (canBuild.get(i).equals(card.getName())){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void buildForFreeCase(Player player, ArrayList<Card> cards, int x) {
