@@ -30,18 +30,18 @@ public class PlayerPanel extends JPanel {
         canBuildPanel = new CanBuildPanel();
         c.gridx=0;
         c.gridy=0;
-        c.weighty=2;
+        c.gridheight=2;
         c.anchor=GridBagConstraints.LINE_START;
         this.add(canBuildPanel, c);
 
         c.gridx=1;
         c.gridy=0;
-        c.weighty=1;
+        c.gridheight=1;
         c.anchor=GridBagConstraints.CENTER;
         this.add(wonderPanel, c);
 
         c.gridy=1;
-        c.weighty=1;
+        c.gridheight=1;
         c.anchor=GridBagConstraints.CENTER;
         this.add(cardsPanel, c);
         this.setOpaque(false);
@@ -49,7 +49,7 @@ public class PlayerPanel extends JPanel {
         chatPanel = new ChatPanel();
         c.gridx=2;
         c.gridy=0;
-        c.weighty=2;
+        c.gridheight=2;
         c.anchor=GridBagConstraints.LINE_END;
         this.add(chatPanel, c);
 //        c.gridx=1;

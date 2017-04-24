@@ -73,6 +73,7 @@ public class Player {
         Player rightPlayer = this.getRightPlayer();
         this.setCardsInHand(rightPlayer.getCopiedCardsInHand());
         cardsPanel = new CardsPanel(cardsInHand, this);
+        constraints.gridx=1;
         constraints.gridy = 1;
         playerPanel.setCardsPanel(cardsPanel);
         playerPanel.add(cardsPanel, constraints);
@@ -83,6 +84,7 @@ public class Player {
         CardsPanel cardsPanel;
         playerPanel.remove(playerPanel.getCardsPanel());
         cardsPanel = new CardsPanel(this.getCardsInHand(), this);
+        constraints.gridx=1;
         constraints.gridy = 1;
         playerPanel.setCardsPanel(cardsPanel);
         playerPanel.add(cardsPanel, constraints);
