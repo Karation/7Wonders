@@ -11,19 +11,33 @@ public class OpponentPanel extends JPanel {
     Player rightPlayer;
     private  LeftOponentPanel leftOponentPanel;
     private RightOponentPanel rightOponentPanel;
+    Box horizontalBox;
     public OpponentPanel(Player player){
+        this.setLayout(new BorderLayout());
         leftPlayer = player.getLeftPlayer();
         rightPlayer=player.getRightPlayer();
-        BorderLayout borderLayout=new BorderLayout();
-        borderLayout.setHgap(50);
-        this.setLayout(borderLayout);
-        this.setOpaque(false);
 
+//        this.setLayout(new GridBagLayout());
+//        this.setOpaque(false);
+//        GridBagConstraints c = new GridBagConstraints();
+//        c.fill=GridBagConstraints.LINE_START;
+//        c.anchor=GridBagConstraints.LINE_START;
+//        leftOponentPanel = new LeftOponentPanel(leftPlayer, player);
+//        this.add(leftOponentPanel, c);
+//
+//        this.add(Box.createHorizontalGlue());
+//
+//        c.fill=GridBagConstraints.LINE_END;
+//        c.anchor = GridBagConstraints.LINE_END;
+//        rightOponentPanel = new RightOponentPanel(rightPlayer, player);
+//        this.add(rightOponentPanel, c);
+        horizontalBox=Box.createHorizontalBox();
         leftOponentPanel = new LeftOponentPanel(leftPlayer, player);
-        this.add(leftOponentPanel, BorderLayout.LINE_START);
-
+        horizontalBox.add(leftOponentPanel);
+        horizontalBox.add(Box.createGlue());
         rightOponentPanel = new RightOponentPanel(rightPlayer, player);
-        this.add(rightOponentPanel, BorderLayout.LINE_END);
+        horizontalBox.add(rightOponentPanel);
+        this.add(horizontalBox);
     }
 
     public LeftOponentPanel getLeftOponentPanel() {

@@ -21,7 +21,7 @@ public class RightOponentPanel extends JPanel{
     public RightOponentPanel(Player rightOpponent, Player player){
         this.setOpaque(false);
         this.setLayout(new GridBagLayout());
-        //this.setBorder(null);
+        this.setBorder(null);
         GridBagConstraints c = new GridBagConstraints();
         c.gridx=0;
         c.gridy=0;

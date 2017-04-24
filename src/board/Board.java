@@ -288,8 +288,9 @@ public class Board {
     }
 
     public void resoveArmyEffects(ArrayList<Player> players) {
-        int numOfshields = 0;
+
         for (Player player : players) {
+            int numOfshields = 0;
             ArrayList<Effect> effects = player.getArmyEffects();
             for (Effect effect : effects) {
                 ArmyEffect armyEffect = (ArmyEffect) effect;
@@ -312,22 +313,23 @@ public class Board {
                 case 1:
                     positiveArmyPoints += 1;
                     player.setPositiveArmyPoints(positiveArmyPoints);
-
+                    player.getPlayerPanel().getWonderPanel().getArmyPointsPanel().addArmyIcon("Army1");
                     break;
                 case 2:
                     positiveArmyPoints += 3;
                     player.setPositiveArmyPoints(positiveArmyPoints);
-
+                    player.getPlayerPanel().getWonderPanel().getArmyPointsPanel().addArmyIcon("Army3");
                     break;
                 case 3:
                     positiveArmyPoints += 5;
                     player.setPositiveArmyPoints(positiveArmyPoints);
-
+                    player.getPlayerPanel().getWonderPanel().getArmyPointsPanel().addArmyIcon("Army5");
                     break;
             }
         } else if (player.getNumOfShields() < opponent.getNumOfShields()) {
             int negativeArmyPoints = player.getNegativeArmyPoints() + 1;
             player.setNegativeArmyPoints(negativeArmyPoints);
+            player.getPlayerPanel().getWonderPanel().getArmyPointsPanel().addArmyIcon("Army-1");
         }
     }
 

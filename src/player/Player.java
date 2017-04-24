@@ -9,6 +9,7 @@ import wonders.WonderStage;
 import wonders.Wonders;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;

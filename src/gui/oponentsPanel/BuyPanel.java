@@ -97,6 +97,9 @@ public class BuyPanel extends JPanel{
         for (int i = 0; i < tradeEffects.size(); i++) {
             TradeEffect tradeEffect=(TradeEffect) tradeEffects.get(i);
             moneyToPay=tradeEffect.resolveTradeEffect(tradeEffect, resourceOrGoodEffect, opponentPanel);
+            if(moneyToPay==1){
+                return moneyToPay;
+            }
         }
         return moneyToPay;
     }

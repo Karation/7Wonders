@@ -1,6 +1,7 @@
 package gui.playerPanel;
 
 import cards.Card;
+import gui.ArmyPointsPanel;
 import wonders.Wonders;
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +13,7 @@ public class WonderPanel extends JPanel{
     ResourcesPanel resourcesPanel;
     BuildingsPanel buildingsPanel;
     MainWonderPanel mainWonderPanel;
-    JFrame frame;
+    ArmyPointsPanel armyPointsPanel;
 
 
     public WonderPanel(Wonders wonder) throws IOException {
@@ -21,7 +22,13 @@ public class WonderPanel extends JPanel{
         setLayout(new GridBagLayout());
         GridBagConstraints c=new GridBagConstraints();
 
+        armyPointsPanel = new ArmyPointsPanel();
+        c.gridx=1;
         c.gridy=0;
+        c.anchor=GridBagConstraints.LINE_START;
+        this.add(armyPointsPanel);
+
+        c.gridy=1;
         c.gridx=0;
         c.anchor=GridBagConstraints.LINE_END;
 
@@ -51,4 +58,7 @@ public class WonderPanel extends JPanel{
 
     public MainWonderPanel getMainWonderPanel() { return mainWonderPanel; }
 
+    public ArmyPointsPanel getArmyPointsPanel() {
+        return armyPointsPanel;
+    }
 }

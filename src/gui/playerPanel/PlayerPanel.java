@@ -1,6 +1,7 @@
 package gui.playerPanel;
 
 import cards.Card;
+import gui.CanBuildPanel;
 import player.Player;
 import wonders.Wonders;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 public class PlayerPanel extends JPanel {
     CardsPanel cardsPanel;
     WonderPanel wonderPanel;
+    CanBuildPanel canBuildPanel;
     public PlayerPanel(ArrayList<Card> cards, Player player, Wonders wonder) throws IOException{
         setLayout(new GridBagLayout());
         cardsPanel = new CardsPanel(cards, player);
@@ -23,14 +25,38 @@ public class PlayerPanel extends JPanel {
             wonderPanel=this.getWonderPanel();
         }
         GridBagConstraints c = new GridBagConstraints();
+
         c.gridx=0;
         c.gridy=0;
+        c.weighty=1;
         c.anchor=GridBagConstraints.CENTER;
         this.add(wonderPanel, c);
-        c.gridy++;
+
+        c.gridy=1;
+        c.weighty=1;
         c.anchor=GridBagConstraints.CENTER;
         this.add(cardsPanel, c);
         this.setOpaque(false);
+
+//        c.gridx=1;
+//        c.gridy=1;
+//        //c.fill=GridBagConstraints.
+//        c.ipady=1;
+//        c.weighty=2;
+//        c.anchor=GridBagConstraints.CENTER;
+//        ChatPanel chatPanel = new ChatPanel();
+//        this.add(chatPanel, c);
+
+//        this.setLayout(new FlowLayout());
+//        cardsPanel = new CardsPanel(cards, player);
+//        if (wonderPanel==null) {
+//            wonderPanel = new WonderPanel(wonder);
+//        }
+//        else {
+//            wonderPanel=this.getWonderPanel();
+//        }
+//        this.add(wonderPanel);
+
     }
 
     public CardsPanel getCardsPanel() {
@@ -38,6 +64,10 @@ public class PlayerPanel extends JPanel {
     }
     public WonderPanel getWonderPanel() {
         return wonderPanel;
+    }
+
+    public CanBuildPanel getCanBuildPanel() {
+        return canBuildPanel;
     }
 
     public void setCardsPanel(CardsPanel cardsPanel) {

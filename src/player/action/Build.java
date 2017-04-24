@@ -80,6 +80,7 @@ public class Build  implements Action{
 
                 if (army.getCanBuild()!=null){
                     player.getCanBuildArray().add(army.getCanBuild());
+                    player.getPlayerPanel().getCanBuildPanel().addToList(army.getCanBuild());
                 }
                 break;
             case "Culture":
@@ -92,6 +93,7 @@ public class Build  implements Action{
 
                 if (culture.getCanBuild()!=null){
                     player.getCanBuildArray().add(culture.getCanBuild());
+                    player.getPlayerPanel().getCanBuildPanel().addToList(culture.getCanBuild());
                 }
                 break;
             case "Science":
@@ -106,6 +108,8 @@ public class Build  implements Action{
                 if (science.getCanBuild()!=null && science.getCanBuild2()!=null){
                     player.getCanBuildArray().add(science.getCanBuild());
                     player.getCanBuildArray().add(science.getCanBuild2());
+                    player.getPlayerPanel().getCanBuildPanel().addToList(science.getCanBuild());
+                    player.getPlayerPanel().getCanBuildPanel().addToList(science.getCanBuild2());
                 }
                 break;
             case "Trade":
@@ -124,6 +128,7 @@ public class Build  implements Action{
 
                 if (trade.getCanBuild()!=null){
                     player.getCanBuildArray().add(trade.getCanBuild());
+                    player.getPlayerPanel().getCanBuildPanel().addToList(trade.getCanBuild());
                 }
                 break;
         }

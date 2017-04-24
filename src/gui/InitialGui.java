@@ -7,13 +7,14 @@ import player.Player;
 import wonders.Wonders;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
 
 public class InitialGui {
-    private static final String BACKGROUND_IMAGE_PATH = "wondersWallpaper.jpg";
+    private static final String BACKGROUND_IMAGE_PATH = "Galaxy.jpg";
     PlayerPanel playerPanel;
 
     public InitialGui(Player player, ArrayList<Card> cards, Wonders wonder) throws IOException{
@@ -35,8 +36,9 @@ public class InitialGui {
         mainPanel.setLayout(new GridBagLayout());
         GridBagConstraints c =new GridBagConstraints();
         c.gridx=0;
-        c.gridy=1;
-        c.anchor=GridBagConstraints.PAGE_END;
+        c.gridy=0;
+        c.weighty=1;
+        c.anchor=GridBagConstraints.LINE_START;
         OpponentPanel opponentPanel=new OpponentPanel(player);
         mainPanel.add(opponentPanel, c);
         player.setOpponentPanel(opponentPanel);
