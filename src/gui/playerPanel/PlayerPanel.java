@@ -15,6 +15,7 @@ public class PlayerPanel extends JPanel {
     CardsPanel cardsPanel;
     WonderPanel wonderPanel;
     CanBuildPanel canBuildPanel;
+    ChatPanel chatPanel;
     public PlayerPanel(ArrayList<Card> cards, Player player, Wonders wonder) throws IOException{
         setLayout(new GridBagLayout());
         cardsPanel = new CardsPanel(cards, player);
@@ -26,7 +27,14 @@ public class PlayerPanel extends JPanel {
         }
         GridBagConstraints c = new GridBagConstraints();
 
+        canBuildPanel = new CanBuildPanel();
         c.gridx=0;
+        c.gridy=0;
+        c.weighty=2;
+        c.anchor=GridBagConstraints.LINE_START;
+        this.add(canBuildPanel, c);
+
+        c.gridx=1;
         c.gridy=0;
         c.weighty=1;
         c.anchor=GridBagConstraints.CENTER;
@@ -38,6 +46,12 @@ public class PlayerPanel extends JPanel {
         this.add(cardsPanel, c);
         this.setOpaque(false);
 
+        chatPanel = new ChatPanel();
+        c.gridx=2;
+        c.gridy=0;
+        c.weighty=2;
+        c.anchor=GridBagConstraints.LINE_END;
+        this.add(chatPanel, c);
 //        c.gridx=1;
 //        c.gridy=1;
 //        //c.fill=GridBagConstraints.
