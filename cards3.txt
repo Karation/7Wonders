@@ -1,0 +1,16 @@
+CityHall Culture 6 SSOG 3 null null CardsAge3\CityHall.jpg
+Gardens Culture 5 ZZW 3 null null CardsAge3\Gardens.jpg
+Palace Culture 8 SOWZGPC 3 null null CardsAge3\Palace.jpg
+Pantheon Culture 7 ZZOGPC 3 null null CardsAge3\Pantheon.jpg
+Senate Culture 6 WWSO 3 null null CardsAge3\Senate.jpg
+Academy Science Math SSSG 3 null null CardsAge3\Academy.jpg
+Observatory Science Mechanics OOGC 3 null null CardsAge3\Observatory.jpg
+Osier Science Math ZZPC 3 null null CardsAge3\Osier.jpg
+University Science Scripture WWPG 3 null null CardsAge3\University.jpg
+Workshop Science Mechanics WPG 3 null null CardsAge3\Workshop.jpg
+Arsenal Army 3 WWOC 3 null null CardsAge3\Arsenal.jpg
+SiegeMachineries Army 3 ZZZW 3 null null CardsAge3\SiegeMachineries.jpg
+Strengthening Army 3 OOOP 3 null null CardsAge3\Strengthening.jpg
+Arena Trade WonderStagesMix SSO 3 null null CardsAge3\Arena.jpg
+Lighthouse Trade TradeCardsMix SG 3 null null CardsAge3\Lighthouse.jpg
+Port Trade ResourceCardsMix WOC 3 null null CardsAge3\Port.jpg

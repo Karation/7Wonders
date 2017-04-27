@@ -1,0 +1,12 @@
+BuildersGuild Guild WonderStages SSZZG 3 null null Guilds\BuildersGuild.jpg
+CraftsmanGuild Guild GoodCards OOSS 3 null null Guilds\CraftsmanGuild.jpg
+JudgesGuild Guild CultureCards WWWSC 3 null null Guilds\JudgesGuild.jpg
+MerchantsGuild Guild TradeCards GCP 3 null null Guilds\MerchantsGuild.jpg
+PhilosophersGuild Guild ScienceCards ZZZPC 3 null null Guilds\PhilosophersGuild.jpg
+ScientistsGuild Guild ChooseSymbol WWOOP 3 null null Guilds\ScientistsGuild.jpg
+ShipownersGuild Guild ResourceGoodGuildCards WWWGP 3 null null Guilds\ShipownersGuild.jpg
+SpiesGuild Guild ArmyCards ZZZG 3 null null Guilds\SpiesGuild.jpg
+StrategiestGuild Guild Defeats OOSC 3 null null Guilds\StrategiestGuild.jpg
+WorkersGuild Guild ResourceCards OOZSW 3 null null Guilds\WorkersGuild.jpg
+
+
