@@ -11,7 +11,7 @@ import javax.swing.*;
 /**
  * Created by mkrec_000 on 28/03/2017.
  */
-public class TradeEffect extends Effect{
+public class TradeEffect extends Effect {
     String emblem;
 
     public TradeEffect(String effectType, String emblem) {
@@ -23,50 +23,60 @@ public class TradeEffect extends Effect{
         return emblem;
     }
 
-    public int resolveTradeEffect(TradeEffect tradeEffect, Effect resourceOrGood, JPanel opponentPanel){
+    public int resolveTradeEffect(TradeEffect tradeEffect, Effect resourceOrGood, JPanel opponentPanel) {
         int moneyToPay;
         String emblemName = tradeEffect.getEmblem();
 
-        switch (emblemName){
+        switch (emblemName) {
             case "WestTrade":
-                if ((resourceOrGood instanceof ResourceEffect ||resourceOrGood instanceof MixedResourceEffect || resourceOrGood instanceof DoubleResourceEffect) && opponentPanel instanceof LeftOponentPanel){
-                    moneyToPay=1;
+                if ((resourceOrGood instanceof ResourceEffect || resourceOrGood instanceof MixedResourceEffect || resourceOrGood instanceof DoubleResourceEffect) && opponentPanel instanceof LeftOponentPanel) {
+                    moneyToPay = 1;
                     return moneyToPay;
-                }else {
+                } else {
                     moneyToPay = 2;
                     return moneyToPay;
                 }
             case "EastTrade":
-                if ((resourceOrGood instanceof ResourceEffect || resourceOrGood instanceof MixedResourceEffect || resourceOrGood instanceof DoubleResourceEffect) && opponentPanel instanceof RightOponentPanel){
-                    moneyToPay=1;
+                if ((resourceOrGood instanceof ResourceEffect || resourceOrGood instanceof MixedResourceEffect || resourceOrGood instanceof DoubleResourceEffect) && opponentPanel instanceof RightOponentPanel) {
+                    moneyToPay = 1;
                     return moneyToPay;
-                }else{
-                    moneyToPay=2;
+                } else {
+                    moneyToPay = 2;
                     return moneyToPay;
                 }
             case "ResourceTrade":
-                if((resourceOrGood instanceof ResourceEffect || resourceOrGood instanceof MixedResourceEffect || resourceOrGood instanceof DoubleResourceEffect) && (opponentPanel instanceof RightOponentPanel || opponentPanel instanceof LeftOponentPanel)){
-                    moneyToPay=1;
+                if ((resourceOrGood instanceof ResourceEffect || resourceOrGood instanceof MixedResourceEffect || resourceOrGood instanceof DoubleResourceEffect) && (opponentPanel instanceof RightOponentPanel || opponentPanel instanceof LeftOponentPanel)) {
+                    moneyToPay = 1;
                     return moneyToPay;
                 }
             case "GoodsTrade":
-                if (resourceOrGood instanceof GoodEffect ){
-                    moneyToPay=1;
+                if (resourceOrGood instanceof GoodEffect) {
+                    moneyToPay = 1;
                     return moneyToPay;
-                }else{
-                    moneyToPay=2;
+                } else {
+                    moneyToPay = 2;
                     return moneyToPay;
                 }
         }
-        moneyToPay=2;
+        moneyToPay = 2;
         return moneyToPay;
     }
-    public int resolveMoneyResourceEffect(Player player){
-        int numOfResourceCards;
+
+    public int resolveInstantTradeEffect(Player player, String tradeEmblem) {
         Player leftOpponent = player.getLeftPlayer();
         Player rightOpponent = player.getRightPlayer();
 
-        return numOfResourceCards=leftOpponent.getResourceEffects().size()+rightOpponent.getResourceEffects().size() + player.getResourceEffects().size();
-
+        switch (tradeEmblem) {
+            case "ResourceMoney":
+                return leftOpponent.getResourceEffects().size() + rightOpponent.getResourceEffects().size() + player.getResourceEffects().size();
+            case "WonderStagesMix":
+                return (player.getWonderStages().size()) * 3;
+            case "TradeCardsMix":
+                return player.getTradeEffects().size();
+            case "ResourceCardsMix":
+                return player.getResourceEffects().size();
+        }
+        return 0;
     }
+
 }

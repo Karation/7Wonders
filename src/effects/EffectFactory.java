@@ -29,6 +29,8 @@ public class EffectFactory {
             return new MoneyEffect(type, Integer.parseInt(effect));
         } else if (type.equals("WonderEffect")) {
             return new WonderEffect(type, effect);
+        } else if (type.equals("Guild")) {
+            return new GuildEffect(type, effect);
         } else return null;
     }
 }

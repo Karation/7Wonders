@@ -6,7 +6,6 @@ import gui.oponentsPanel.*;
 import gui.optionalPanels.CardsInGraveChoiceDialog;
 import gui.optionalPanels.UseLastCardDialog;
 import gui.playerPanel.BuildingsPanel;
-import gui.playerPanel.CardsPanel;
 import gui.playerPanel.ResourcesPanel;
 import gui.playerPanel.TradePanel;
 import player.Player;
@@ -28,7 +27,9 @@ public class Board {
     private ArrayList<Card> cardsInGrave = new ArrayList<>();
     private int age = 1;
     private Deck deck;
-    private String filepath2="cards2.txt";
+    private final static String FILEPATH_2 ="cards2.txt";
+    private final static String FILEPATH_3 ="cards3.txt";
+    private final static String GUILDS ="guilds.txt";
 
     public Board(ArrayList<Player> players) {
         this.players = players;
@@ -123,11 +124,13 @@ public class Board {
         leftOponentPanel.remove(leftOponentPanel.getBuyPanel());
         rightOponentPanel.remove(rightOponentPanel.getBuyPanel());
 
-        c.gridx = 2;
-        c.gridy = 0;
+        c.gridx=2;
+        c.gridy=0;
+        c.anchor=GridBagConstraints.FIRST_LINE_START;
         leftOponentPanel.add(leftBuyPanel, c);
-        c.gridx = 0;
-        c.gridy = 0;
+        c.gridx=0;
+        c.gridy=0;
+        c.anchor=GridBagConstraints.FIRST_LINE_START;
         rightOponentPanel.add(rightBuyPanel, c);
         leftOponentPanel.setBuyPanel(leftBuyPanel);
         rightOponentPanel.setBuyPanel(rightBuyPanel);
@@ -256,9 +259,17 @@ public class Board {
         checkForBuildFromGraveEffect(cardsInGrave);
         this.resoveArmyEffects(players);
 
+        age++;
+
         try {
             deck=new Deck();
-            deck.dealCards(deck.shuffle(deck.loadCards(filepath2)), players);
+            if (age==2) {
+                deck.dealCards(deck.shuffle(deck.loadCards(FILEPATH_2)), players);
+            }else if(age==3){
+                ArrayList<Card> cardsAge3 = deck.loadCards(FILEPATH_3);
+                ArrayList<Card> guilds = deck.loadCards(GUILDS);
+                deck.dealCards(deck.addGuildsToDeck(guilds, cardsAge3, players.size()), players);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -335,5 +346,9 @@ public class Board {
 
     public ArrayList<Card> getCardsInGrave() {
         return cardsInGrave;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
     }
 }

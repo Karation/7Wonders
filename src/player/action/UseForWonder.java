@@ -9,9 +9,6 @@ import wonders.Wonders;
 
 import java.util.ArrayList;
 
-/**
- * Created by mkrec_000 on 26/03/2017.
- */
 public class UseForWonder implements Action{
     private Card card;
     private Wonders wonder;
@@ -26,12 +23,11 @@ public class UseForWonder implements Action{
         if(player.getWonder().checkWhichWonderStageBuild()!=null){
             WonderStage wonderStage = player.getWonder().checkWhichWonderStageBuild();
             ArrayList<Effect> wonderStageEffects = wonderStage.getEffects();
-            for (int i = 0; i < wonderStageEffects.size(); i++) {
-                Effect effect = wonderStageEffects.get(i);
-                    String effectType=effect.getEffectType();
-                switch (effectType){
+            for (Effect effect : wonderStageEffects) {
+                String effectType = effect.getEffectType();
+                switch (effectType) {
                     case "Culture":
-                        CultureEffect cultureEffect =(CultureEffect) effect;
+                        CultureEffect cultureEffect = (CultureEffect) effect;
                         player.addEffect(effectType, cultureEffect);
                         wonderStage.setBuilt(true);
                         break;
@@ -54,14 +50,18 @@ public class UseForWonder implements Action{
                         break;
                     case "Money":
                         MoneyEffect moneyEffect = (MoneyEffect) effect;
-                        int money = player.getMoney()+moneyEffect.getAmount();
+                        int money = player.getMoney() + moneyEffect.getAmount();
                         player.setMoney(money);
                         player.getPlayerPanel().getWonderPanel().getBuildingsPanel().updateMoneyIcon(money);
                         wonderStage.setBuilt(true);
                         break;
                 }
+
                 player.getCardsInHand().remove(card);
             }
+            ArrayList<WonderStage> wonderStages=player.getWonderStages();
+            wonderStages.add(wonderStage);
+            player.setWonderStages(wonderStages);
         }
     }
 }

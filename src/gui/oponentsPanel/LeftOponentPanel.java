@@ -33,8 +33,8 @@ public class LeftOponentPanel extends JPanel{
 
 
         c.gridx=1;
-        c.anchor=GridBagConstraints.LINE_START;
-        //c.gridy=1;
+        c.gridy=0;
+        c.anchor=GridBagConstraints.FIRST_LINE_START;
         buildingsPanel = new BuildingsPanel();
         this.add(buildingsPanel, c);
 
@@ -48,9 +48,9 @@ public class LeftOponentPanel extends JPanel{
 
         c.gridx=2;
         c.gridy=0;
-        c.anchor=GridBagConstraints.PAGE_START;
+        c.anchor=GridBagConstraints.FIRST_LINE_START;
         buyPanel=new BuyPanel(leftOpponent, player, this);
-        this.add(buyPanel);
+        this.add(buyPanel, c);
 
     }
 

@@ -94,4 +94,10 @@ public class Deck {
             return cards;
         }
     }
+    public ArrayList<Card> addGuildsToDeck(ArrayList<Card> guilds, ArrayList<Card> cards, int numberOfPlayers){
+        for (int i = 0; i < numberOfPlayers + 2; i++) {
+            cards.add(guilds.get(i));
+        }
+        return cards;
+    }
 }

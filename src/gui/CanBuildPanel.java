@@ -9,16 +9,23 @@ import java.awt.*;
 public class CanBuildPanel extends JPanel{
     JList jList;
     DefaultListModel<String> model;
+    JScrollPane pane;
     public CanBuildPanel() {
         model = new DefaultListModel<>();
+        pane=new JScrollPane();
         jList=new JList(model);
-        //this.setOpaque(false);
-        this.add(jList);
-        jList.setBackground(new Color(30));
-        jList.setEnabled(false);
-        this.setSize(100, 300);
-        this.setVisible(true);
 
+        setOpaque(false);
+
+        this.add(pane);
+
+        pane.setOpaque(false);
+        pane.setViewportView(jList);
+        pane.getViewport().setOpaque(false);
+        jList.setOpaque(false);
+        pane.setPreferredSize(new Dimension(150, 200));
+        this.setBounds(0,0,0,0);
+        //((DefaultListCellRenderer) jList.getCellRenderer()).setOpaque(false);
     }
     public void addToList(String canBuild){
         model.addElement(canBuild);

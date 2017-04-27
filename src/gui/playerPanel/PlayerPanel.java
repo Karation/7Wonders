@@ -46,7 +46,7 @@ public class PlayerPanel extends JPanel {
         this.add(cardsPanel, c);
         this.setOpaque(false);
 
-        chatPanel = new ChatPanel();
+        chatPanel = new ChatPanel(player.getBoard().getPlayers());
         c.gridx=2;
         c.gridy=0;
         c.gridheight=2;

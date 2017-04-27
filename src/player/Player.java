@@ -42,6 +42,8 @@ public class Player {
     private ArrayList<String> canBuild = new ArrayList<>();
     private ArrayList<Effect> boughtResourceEffects = new ArrayList<>();
     private ArrayList<Effect> boughtGoodEffects = new ArrayList<>();
+    private ArrayList<Effect> guildEffects = new ArrayList<>();
+    private ArrayList<WonderStage> wonderStages = new ArrayList<>();
     private Card cardToBeRemoved;
 
     private PlayerPanel playerPanel;
@@ -579,5 +581,25 @@ public class Player {
 
     public void setCanBuildArray(ArrayList<String> canBuild) {
         this.canBuild = canBuild;
+    }
+
+    public ArrayList<Effect> getCultureEffects() {
+        return cultureEffects;
+    }
+
+    public ArrayList<Effect> getScienceEffects() {
+        return scienceEffects;
+    }
+
+    public ArrayList<Effect> getGuildEffects() {
+        return guildEffects;
+    }
+
+    public ArrayList<WonderStage> getWonderStages() {
+        return wonderStages;
+    }
+
+    public void setWonderStages(ArrayList<WonderStage> wonderStages) {
+        this.wonderStages = wonderStages;
     }
 }

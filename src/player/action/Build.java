@@ -119,12 +119,8 @@ public class Build  implements Action{
                 tradePanel.addTradeIcon(emblem, trade);
                 backgroundPanel.paintAll(backgroundPanel.getGraphics());
 
-                //poprawic
-                if (tradeEffect.getEmblem().equals("ResourceMoney")){
-                    money += tradeEffect.resolveMoneyResourceEffect(player);
+                    money += tradeEffect.resolveInstantTradeEffect(player, tradeEffect.getEmblem());
                     player.setMoney(money);
-                }
-                player.addEffect(type, tradeEffect);
 
                 if (trade.getCanBuild()!=null){
                     player.getCanBuildArray().add(trade.getCanBuild());

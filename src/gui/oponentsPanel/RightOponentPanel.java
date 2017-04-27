@@ -25,17 +25,14 @@ public class RightOponentPanel extends JPanel{
         GridBagConstraints c = new GridBagConstraints();
         c.gridx=0;
         c.gridy=0;
-
+        c.anchor=GridBagConstraints.FIRST_LINE_END;
         buyPanel = new BuyPanel(rightOpponent, player, this);
-
         this.add(buyPanel, c);
 
         c.gridx=1;
         buildingsPanel = new BuildingsPanel();
         this.add(buildingsPanel, c);
 
-        //c.gridx=1;
-        //c.gridy=0;
         c.gridx=2;
         mainWonderPanel = new MainWonderPanel(rightOpponent.getWonder());
         this.add(mainWonderPanel, c);
