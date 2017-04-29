@@ -15,30 +15,31 @@ import java.util.ArrayList;
 /**
  * Created by mkrec_000 on 13/03/2017.
  */
-public class BuildingsPanel extends JPanel implements ShowCardOnIcon{
-    JLabel armyLabel;
-    JLabel pointsLabel;
-    ScienceIconsPanel mathPanel = new ScienceIconsPanel();
-    ScienceIconsPanel scriptPanel = new ScienceIconsPanel();
-    ScienceIconsPanel mechaPanel = new ScienceIconsPanel();
-    JLabel moneyLabel;
-    ArrayList<Card> armyCards=new ArrayList<>();
-    ArrayList<Card> cultureCards = new ArrayList<>();
+public class BuildingsPanel extends JPanel implements ShowCardOnIcon {
+    private JLabel armyLabel;
+    private JLabel pointsLabel;
+    private ScienceIconsPanel mathPanel = new ScienceIconsPanel();
+    private ScienceIconsPanel scriptPanel = new ScienceIconsPanel();
+    private ScienceIconsPanel mechaPanel = new ScienceIconsPanel();
+    private JLabel moneyLabel;
+    private ArrayList<Card> armyCards = new ArrayList<>();
+    private ArrayList<Card> cultureCards = new ArrayList<>();
 
-    int numOfShields = 0;
-    int numOfPoints = 0;
-    int money;
-    int startingMoney=3;
-    public BuildingsPanel(){
+    private int numOfShields = 0;
+    private int numOfPoints = 0;
+    private int money;
+    private int startingMoney = 3;
+
+    public BuildingsPanel() {
 
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         this.setOpaque(false);
         c.anchor = GridBagConstraints.LINE_START;
-        c.gridx=0;
-        c.gridy=0;
+        c.gridx = 0;
+        c.gridy = 0;
 
-        armyLabel = new JLabel(""+numOfShields);
+        armyLabel = new JLabel("" + numOfShields);
         armyLabel.setIcon(new ImageIcon("Icons\\Army.jpg"));
         armyLabel.setHorizontalTextPosition(JLabel.CENTER);
         armyLabel.setForeground(Color.black);
@@ -48,20 +49,21 @@ public class BuildingsPanel extends JPanel implements ShowCardOnIcon{
         this.add(armyLabel, c);
 
         c.gridy++;
-        pointsLabel = new JLabel(""+numOfPoints);
+        pointsLabel = new JLabel("" + numOfPoints);
         pointsLabel.setIcon(new ImageIcon("Icons\\Points.jpg"));
         pointsLabel.setHorizontalTextPosition(JLabel.CENTER);
         pointsLabel.setForeground(Color.black);
         this.add(pointsLabel, c);
 
         c.gridy++;
-        moneyLabel=new JLabel();
+        moneyLabel = new JLabel();
         moneyLabel.setIcon(new ImageIcon("Icons\\Money.jpg"));
         moneyLabel.setHorizontalTextPosition(JLabel.CENTER);
         moneyLabel.setText(String.valueOf(startingMoney));
         this.add(moneyLabel, c);
 
         c.gridy++;
+        c.weightx=2;
         this.add(mathPanel, c);
 
         c.gridy++;
@@ -76,13 +78,14 @@ public class BuildingsPanel extends JPanel implements ShowCardOnIcon{
 //        this.add(sciencePanel, c);
 
     }
-    public void addScienceIcon(String scienceName, Science science){
+
+    public void addScienceIcon(String scienceName, Science science) {
         JLabel scienceIcon = new JLabel();
 
         MouseAdapter mouseAdapter = showCardsImage(science);
         scienceIcon.addMouseListener(mouseAdapter);
 
-        switch (scienceName){
+        switch (scienceName) {
             case "Math":
                 mathPanel.addIcon(scienceName, scienceIcon);
                 break;
@@ -98,34 +101,37 @@ public class BuildingsPanel extends JPanel implements ShowCardOnIcon{
 //        scienceIcon.setBorder(null);
 
 
-
-
 //        sciencePanel.add(scienceIcon);
     }
-    public void addArmyPoints(int shields, Card army){
-        numOfShields+=shields;
-        armyLabel.setText(""+numOfShields);
+
+    public void addArmyPoints(int shields, Card army) {
+        numOfShields += shields;
+        armyLabel.setText("" + numOfShields);
 
         armyCards.add(army);
-        MouseAdapter mouseAdapter =showCardsImage(army);
+        MouseAdapter mouseAdapter = showCardsImage(army);
         armyLabel.addMouseListener(mouseAdapter);
     }
-    public void addCulturePoints(int points, Card culture){
-        numOfPoints+=points;
-        pointsLabel.setText(""+numOfPoints);
+
+    public void addCulturePoints(int points, Card culture) {
+        numOfPoints += points;
+        pointsLabel.setText("" + numOfPoints);
 
         cultureCards.add(culture);
-        MouseAdapter mouseAdapter =showCardsImage(culture);
+        MouseAdapter mouseAdapter = showCardsImage(culture);
         pointsLabel.addMouseListener(mouseAdapter);
     }
-    public void addMoney(int numOfMoney){
+
+    public void addMoney(int numOfMoney) {
         moneyLabel.setText(String.valueOf(numOfMoney));
     }
-    public void substractMoney(int amount){
-        moneyLabel.setText(String.valueOf(money-amount));
+
+    public void substractMoney(int amount) {
+        moneyLabel.setText(String.valueOf(money - amount));
     }
-    public void updateMoneyIcon(int playerMoney){
-        moneyLabel.setText(""+playerMoney);
+
+    public void updateMoneyIcon(int playerMoney) {
+        moneyLabel.setText("" + playerMoney);
     }
 
     @Override
@@ -140,11 +146,11 @@ public class BuildingsPanel extends JPanel implements ShowCardOnIcon{
                 frame.setLayout(new FlowLayout());
                 if (card instanceof Science) {
                     frame.getContentPane().add(new JLabel(new ImageIcon(card.getImage())));
-                }else if(card instanceof Army) {
+                } else if (card instanceof Army) {
                     for (Card armyCard : armyCards) {
                         frame.getContentPane().add(new JLabel(new ImageIcon(armyCard.getImage())));
                     }
-                }else if(card instanceof Culture){
+                } else if (card instanceof Culture) {
                     for (Card cultureCard : cultureCards) {
                         frame.getContentPane().add(new JLabel(new ImageIcon(cultureCard.getImage())));
                     }
@@ -163,19 +169,22 @@ public class BuildingsPanel extends JPanel implements ShowCardOnIcon{
         };
     }
 }
-class ScienceIconsPanel extends JPanel{
-        GridBagConstraints c = new GridBagConstraints();
-    ScienceIconsPanel(){
+
+class ScienceIconsPanel extends JPanel {
+    private GridBagConstraints c = new GridBagConstraints();
+
+    ScienceIconsPanel() {
         this.setOpaque(false);
         this.setBorder(null);
         this.setLayout(new GridBagLayout());
-        c.gridy=0;
-        c.gridx=0;
+        c.gridy = 0;
+        c.gridx = 0;
     }
-    void addIcon(String scienceIconName, JLabel scienceIcon){
+
+    void addIcon(String scienceIconName, JLabel scienceIcon) {
         scienceIcon.setOpaque(false);
         scienceIcon.setBorder(null);
-        scienceIcon.setIcon(new ImageIcon("Icons\\"+scienceIconName+".jpg"));
+        scienceIcon.setIcon(new ImageIcon("Icons\\" + scienceIconName + ".jpg"));
         this.add(scienceIcon, c);
         c.gridx++;
     }

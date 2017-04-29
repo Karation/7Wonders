@@ -12,7 +12,7 @@ import java.awt.*;
  * Created by mkrec_000 on 22/03/2017.
  */
 public class LeftOponentPanel extends JPanel{
-    ResourcesPanel resourcesPanel;
+    private ResourcesPanel resourcesPanel;
     BuildingsPanel buildingsPanel;
     MainWonderPanel mainWonderPanel;
     BuyPanel buyPanel;
@@ -23,6 +23,7 @@ public class LeftOponentPanel extends JPanel{
         GridBagConstraints c = new GridBagConstraints();
         c.gridx=0;
         c.gridy=0;
+        c.weighty=6;
 
         mainWonderPanel = new MainWonderPanel(leftOpponent.getWonder());
         this.add(mainWonderPanel, c);
@@ -34,6 +35,7 @@ public class LeftOponentPanel extends JPanel{
 
         c.gridx=1;
         c.gridy=0;
+        c.weighty=6;
         c.anchor=GridBagConstraints.FIRST_LINE_START;
         buildingsPanel = new BuildingsPanel();
         this.add(buildingsPanel, c);
@@ -42,12 +44,14 @@ public class LeftOponentPanel extends JPanel{
 
         c.gridx=0;
         c.gridy=1;
+        c.weighty=1;
         c.anchor = GridBagConstraints.LINE_END;
         resourcesPanel = new ResourcesPanel();
         this.add(resourcesPanel, c);
 
         c.gridx=2;
         c.gridy=0;
+        c.weighty=3;
         c.anchor=GridBagConstraints.FIRST_LINE_START;
         buyPanel=new BuyPanel(leftOpponent, player, this);
         this.add(buyPanel, c);
