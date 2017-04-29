@@ -18,7 +18,9 @@ import java.util.ArrayList;
 public class BuildingsPanel extends JPanel implements ShowCardOnIcon{
     JLabel armyLabel;
     JLabel pointsLabel;
-    JPanel sciencePanel;
+    ScienceIconsPanel mathPanel = new ScienceIconsPanel();
+    ScienceIconsPanel scriptPanel = new ScienceIconsPanel();
+    ScienceIconsPanel mechaPanel = new ScienceIconsPanel();
     JLabel moneyLabel;
     ArrayList<Card> armyCards=new ArrayList<>();
     ArrayList<Card> cultureCards = new ArrayList<>();
@@ -60,23 +62,45 @@ public class BuildingsPanel extends JPanel implements ShowCardOnIcon{
         this.add(moneyLabel, c);
 
         c.gridy++;
-        sciencePanel=new JPanel();
-        sciencePanel.setLayout(new GridBagLayout());
-        sciencePanel.setOpaque(false);
-        sciencePanel.setBorder(null);
-        this.add(sciencePanel, c);
+        this.add(mathPanel, c);
+
+        c.gridy++;
+        this.add(scriptPanel, c);
+
+        c.gridy++;
+        this.add(mechaPanel, c);
+//        sciencePanel=new JPanel();
+//        sciencePanel.setLayout(new GridBagLayout());
+//        sciencePanel.setOpaque(false);
+//        sciencePanel.setBorder(null);
+//        this.add(sciencePanel, c);
 
     }
     public void addScienceIcon(String scienceName, Science science){
         JLabel scienceIcon = new JLabel();
-        scienceIcon.setIcon(new ImageIcon("Icons\\"+scienceName+".jpg"));
-        scienceIcon.setOpaque(false);
-        scienceIcon.setBorder(null);
 
         MouseAdapter mouseAdapter = showCardsImage(science);
         scienceIcon.addMouseListener(mouseAdapter);
 
-        sciencePanel.add(scienceIcon);
+        switch (scienceName){
+            case "Math":
+                mathPanel.addIcon(scienceName, scienceIcon);
+                break;
+            case "Scripture":
+                scriptPanel.addIcon(scienceName, scienceIcon);
+                break;
+            case "Mechanics":
+                mechaPanel.addIcon(scienceName, scienceIcon);
+        }
+
+//        scienceIcon.setIcon(new ImageIcon("Icons\\"+scienceName+".jpg"));
+//        scienceIcon.setOpaque(false);
+//        scienceIcon.setBorder(null);
+
+
+
+
+//        sciencePanel.add(scienceIcon);
     }
     public void addArmyPoints(int shields, Card army){
         numOfShields+=shields;
@@ -113,7 +137,6 @@ public class BuildingsPanel extends JPanel implements ShowCardOnIcon{
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
                 frame = new JFrame();
-                frame.setBackground(Color.black);
                 frame.setLayout(new FlowLayout());
                 if (card instanceof Science) {
                     frame.getContentPane().add(new JLabel(new ImageIcon(card.getImage())));
@@ -138,5 +161,22 @@ public class BuildingsPanel extends JPanel implements ShowCardOnIcon{
                 frame.dispose();
             }
         };
+    }
+}
+class ScienceIconsPanel extends JPanel{
+        GridBagConstraints c = new GridBagConstraints();
+    ScienceIconsPanel(){
+        this.setOpaque(false);
+        this.setBorder(null);
+        this.setLayout(new GridBagLayout());
+        c.gridy=0;
+        c.gridx=0;
+    }
+    void addIcon(String scienceIconName, JLabel scienceIcon){
+        scienceIcon.setOpaque(false);
+        scienceIcon.setBorder(null);
+        scienceIcon.setIcon(new ImageIcon("Icons\\"+scienceIconName+".jpg"));
+        this.add(scienceIcon, c);
+        c.gridx++;
     }
 }

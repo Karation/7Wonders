@@ -22,26 +22,27 @@ public class WonderPanel extends JPanel{
         setLayout(new GridBagLayout());
         GridBagConstraints c=new GridBagConstraints();
 
-        armyPointsPanel = new ArmyPointsPanel();
-        c.gridx=1;
         c.gridy=0;
-        c.anchor=GridBagConstraints.LINE_START;
-        this.add(armyPointsPanel);
-
-        c.gridy=1;
-        c.gridx=0;
-        c.anchor=GridBagConstraints.LINE_END;
-
+        c.gridx=1;
+        c.anchor = GridBagConstraints.LAST_LINE_START;
         resourcesPanel = new ResourcesPanel();
         this.add(resourcesPanel, c);
-        c.gridx++;
-        c.anchor = GridBagConstraints.CENTER;
 
+        c.gridx=0;
+        c.gridy=1;
+        c.anchor=GridBagConstraints.FIRST_LINE_END;
+        armyPointsPanel = new ArmyPointsPanel();
+        this.add(armyPointsPanel, c);
+
+
+        c.gridx=1;
+        c.gridy=1;
+        c.anchor = GridBagConstraints.CENTER;
         mainWonderPanel = new MainWonderPanel(wonder);
         this.add(mainWonderPanel, c);
 
         c.gridx++;
-        c.anchor = GridBagConstraints.LINE_START;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
         buildingsPanel = new BuildingsPanel();
         this.add(buildingsPanel, c);
 

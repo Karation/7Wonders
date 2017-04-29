@@ -98,6 +98,6 @@ public class Deck {
         for (int i = 0; i < numberOfPlayers + 2; i++) {
             cards.add(guilds.get(i));
         }
-        return cards;
+        return this.shuffle(cards);
     }
 }

@@ -19,26 +19,25 @@ public class ResourcesPanel  extends JPanel implements ShowCardOnIcon{
         GridBagConstraints c = new GridBagConstraints();
         this.setOpaque(false);
         this.setBackground(Color.red);
+        this.setBorder(null);
         c.gridx=0;
         c.gridy=0;
-        c.anchor=GridBagConstraints.LINE_END;
+        c.anchor=GridBagConstraints.LINE_START;
         resourcesPanel = new JPanel();
         goodsPanel = new JPanel();
 
-        resourcesPanel.setLayout(new GridBagLayout());
+        resourcesPanel.setLayout(new GridLayout());
         resourcesPanel.setOpaque(false);
         resourcesPanel.setBorder(null);
         this.add(resourcesPanel, c);
 
-        c.gridy++;
-        goodsPanel.setLayout(new GridBagLayout());
+        c.gridx++;
+        c.anchor = GridBagConstraints.LINE_END;
+        goodsPanel.setLayout(new GridLayout());
         goodsPanel.setOpaque(false);
         goodsPanel.setBorder(null);
         this.add(goodsPanel, c);
 
-        c.gridx++;
-        JList canBuildList = new JList();
-        this.add(canBuildList);
 
         this.setOpaque(false);
         this.setBorder(null);

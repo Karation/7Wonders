@@ -224,9 +224,8 @@ public class Player {
         ArrayList<Boolean> found = new ArrayList<>();
         refreshCopiedGoodsAndResources();
 
-        for (int i = 0; i < price.length; i++) {
+        for (char temp : price) {
 
-            char temp = price[i];
             if (temp == 'P') {//Paper
                 found.add(findInGoodEffectsArray("Paper"));
             } else if (temp == 'C') {//Cloth
@@ -284,7 +283,6 @@ public class Player {
                 }
             }
         }
-
         for (int i = 0; i < boughtResourceEffects.size(); i++) {
             if (boughtResourceEffects.get(i) instanceof ResourceEffect) {
                 ResourceEffect resourceEffect = (ResourceEffect) boughtResourceEffects.get(i);
@@ -355,7 +353,7 @@ public class Player {
         this.moneyToBeTransfered = moneyToBeTransfered;
     }
 
-    public void setBackgroundPanel(JLabel backgroundPanel) {
+    private void setBackgroundPanel(JLabel backgroundPanel) {
         this.backgroundPanel = backgroundPanel;
     }
 
@@ -367,7 +365,7 @@ public class Player {
         return constraints;
     }
 
-    public void setConstraints(GridBagConstraints constraints) {
+    private void setConstraints(GridBagConstraints constraints) {
         this.constraints = constraints;
     }
 
