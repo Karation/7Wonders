@@ -12,58 +12,51 @@ public class GuildEffect extends Effect{
         this.guildEffectType=guildEffectType;
     }
 
-    public void resolveGuildEffect(Player player, String guildEffectType){
+    public int resolveGuildEffect(Player player){
         Player leftOpponent = player.getLeftPlayer();
         Player rightOpponent = player.getRightPlayer();
         int pointsToAdd=0;
 
-        switch (guildEffectType){
+        switch (this.getGuildEffectType()){
             case "WonderStages":
 
                 break;
             case "GoodCards":
                 pointsToAdd=leftOpponent.getGoodEffects().size();
-                pointsToAdd+=rightOpponent.getGoodEffects().size();
+                return pointsToAdd+=rightOpponent.getGoodEffects().size();
 
-                break;
             case "CultureCards":
                 pointsToAdd=leftOpponent.getCultureEffects().size();
-                pointsToAdd+=rightOpponent.getCultureEffects().size();
+                return pointsToAdd+=rightOpponent.getCultureEffects().size();
 
-                break;
             case "TradeCards":
                 pointsToAdd=leftOpponent.getTradeEffects().size();
-                pointsToAdd+=rightOpponent.getTradeEffects().size();
+                return pointsToAdd+=rightOpponent.getTradeEffects().size();
 
-                break;
             case "ScienceCards":
                 pointsToAdd=leftOpponent.getScienceEffects().size();
-                pointsToAdd+=rightOpponent.getScienceEffects().size();
+                return pointsToAdd+=rightOpponent.getScienceEffects().size();
 
-                break;
             case "ArmyCards":
                 pointsToAdd=leftOpponent.getArmyEffects().size();
-                pointsToAdd+=rightOpponent.getScienceEffects().size();
+                return pointsToAdd+=rightOpponent.getScienceEffects().size();
 
-                break;
             case "ResourceCards":
                 pointsToAdd=leftOpponent.getResourceEffects().size();
-                pointsToAdd+=rightOpponent.getResourceEffects().size();
+                return pointsToAdd+=rightOpponent.getResourceEffects().size();
 
-                break;
             case "Defeats":
                 pointsToAdd=leftOpponent.getNegativeArmyPoints();
-                pointsToAdd+=rightOpponent.getNegativeArmyPoints();
+                return pointsToAdd+=rightOpponent.getNegativeArmyPoints();
 
-                break;
             case "ResourceGoodGuildCards":
-                pointsToAdd=player.getResourceEffects().size() + leftOpponent.getGoodEffects().size() + leftOpponent.getGuildEffects().size();
+                return pointsToAdd=player.getResourceEffects().size() + leftOpponent.getGoodEffects().size() + leftOpponent.getGuildEffects().size();
 
-                break;
             case "ChooseSymbol":
 
                 break;
         }
+        return 0;
     }
     public String getGuildEffectType() {
         return guildEffectType;

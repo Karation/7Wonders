@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class Player {
     public final static int MAX_CARDS_IN_HAND = 7;
     private final static int STARTING_MONEY = 3;
+    private String name="panRolnik";
     private ArrayList<Card> cardsInHand = new ArrayList<>();
     private ArrayList<Card> copiedCardsInHand = new ArrayList<>();
     private ArrayList<Effect> copiedResourceEffects = new ArrayList<>();
@@ -31,6 +32,7 @@ public class Player {
     private int numOfShields = 0;
     private int armyPositivePoints = 0;
     private int armyNegativePoints = 0;
+    private int builtWonderPoints = 0;
     private ArrayList<ArrayList<Effect>> effects = addToEffectArray();
     private ArrayList<Effect> resourceEffects = new ArrayList<>();
     private ArrayList<Effect> cultureEffects = new ArrayList<>();
@@ -44,6 +46,7 @@ public class Player {
     private ArrayList<Effect> boughtGoodEffects = new ArrayList<>();
     private ArrayList<Effect> guildEffects = new ArrayList<>();
     private ArrayList<WonderStage> wonderStages = new ArrayList<>();
+    private ArrayList<Float> overallPoints;
     private Card cardToBeRemoved;
 
     private PlayerPanel playerPanel;
@@ -340,6 +343,82 @@ public class Player {
         }
         return false;
     }
+    public void calculatePoints() {
+        overallPoints= new ArrayList<>();
+        float armyPoints=this.getPositiveArmyPoints()-this.getNegativeArmyPoints();
+        float moneyPoints=(this.getMoney()/3);
+        float wonderPoints = this.getBuiltWonderPoints();
+        float culturePoints = resolveCulturePoints();
+        float tradePoints = resolveTradePoints();
+        float guildPoints = resolveGuildPoints();
+        float sciencePoints = resolveSciencePoints();
+
+        overallPoints.add(armyPoints);
+        overallPoints.add(moneyPoints);
+        overallPoints.add(wonderPoints);
+        overallPoints.add(culturePoints);
+        overallPoints.add(tradePoints);
+        overallPoints.add(guildPoints);
+        overallPoints.add(sciencePoints);
+
+    }
+
+    private float resolveGuildPoints() {
+        float guildPoints=0;
+        for (Effect guildEffect : guildEffects) {
+            GuildEffect guildEffect1 = (GuildEffect) guildEffect;
+            guildPoints +=guildEffect1.resolveGuildEffect(this );
+        }
+        return guildPoints;
+    }
+    private float resolveCulturePoints(){
+        float culturePoints=0;
+        for (Effect cultureEffect : cultureEffects) {
+            CultureEffect cultureEffect1 = (CultureEffect) cultureEffect;
+            culturePoints += cultureEffect1.getNumOfPoints();
+        }
+        return culturePoints;
+    }
+    private float resolveTradePoints(){
+        float tradePoints=0;
+        for (Effect tradeEffect : tradeEffects) {
+            TradeEffect tradeEffect1 = (TradeEffect) tradeEffect;
+            tradePoints += tradeEffect1.resolveTradePointsEffect(this, tradeEffect1.getEmblem());
+        }
+        return tradePoints;
+    }
+    private float resolveSciencePoints(){
+        int math =0;
+        int scripture=0;
+        int mechanics=0;
+        for (Effect scienceEffect : scienceEffects) {
+            ScienceEffect scienceEffect1 = (ScienceEffect) scienceEffect;
+            switch (scienceEffect1.getScienceSymbol()){
+                case "Math":
+                    math++;
+                    break;
+                case "Scripture":
+                    scripture++;
+                    break;
+                case "Mechanics":
+                    mechanics++;
+                    break;
+            }
+        }
+        int smallest = findSmallestNumber(new int[]{math, scripture, mechanics});
+        return (((math^2)+(scripture^2)+(mechanics^2))+(7*smallest));
+    }
+
+    private int findSmallestNumber(int[] ints) {
+        int smallest = ints[0];
+        for (int i = 1; i < ints.length; i++) {
+            if (ints[i]<smallest){
+                smallest=ints[i];
+            }
+        }
+        return smallest;
+    }
+
 
     public void payOpponentForBoughtItem(int moneyToPay) {
         moneyToBeTransfered += moneyToPay;
@@ -599,5 +678,25 @@ public class Player {
 
     public void setWonderStages(ArrayList<WonderStage> wonderStages) {
         this.wonderStages = wonderStages;
+    }
+
+    public int getBuiltWonderPoints() {
+        return builtWonderPoints;
+    }
+
+    public void setBuiltWonderPoints(int builtWonderPoints) {
+        this.builtWonderPoints = builtWonderPoints;
+    }
+
+    public ArrayList<Float> getOverallPoints() {
+        return overallPoints;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

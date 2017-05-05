@@ -14,6 +14,7 @@ public class WonderPanel extends JPanel{
     BuildingsPanel buildingsPanel;
     MainWonderPanel mainWonderPanel;
     ArmyPointsPanel armyPointsPanel;
+    SciencePanel sciencePanel;
 
 
     public WonderPanel(Wonders wonder) throws IOException {
@@ -37,14 +38,23 @@ public class WonderPanel extends JPanel{
 
         c.gridx=1;
         c.gridy=1;
+        c.gridheight=2;
         c.anchor = GridBagConstraints.CENTER;
         mainWonderPanel = new MainWonderPanel(wonder);
         this.add(mainWonderPanel, c);
 
+        c.gridy=1;
         c.gridx++;
+        c.gridheight=1;
         c.anchor = GridBagConstraints.FIRST_LINE_START;
         buildingsPanel = new BuildingsPanel();
         this.add(buildingsPanel, c);
+
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        c.gridy=2;
+        sciencePanel = new SciencePanel();
+        this.add(sciencePanel, c);
+
 
 
     }
@@ -61,5 +71,9 @@ public class WonderPanel extends JPanel{
 
     public ArmyPointsPanel getArmyPointsPanel() {
         return armyPointsPanel;
+    }
+
+    public SciencePanel getSciencePanel() {
+        return sciencePanel;
     }
 }

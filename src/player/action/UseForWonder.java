@@ -3,6 +3,7 @@ package player.action;
 import cards.Card;
 import cards.Trade;
 import effects.*;
+import gui.playerPanel.WonderBuildPanel;
 import player.Player;
 import wonders.WonderStage;
 import wonders.Wonders;
@@ -23,12 +24,15 @@ public class UseForWonder implements Action{
         if(player.getWonder().checkWhichWonderStageBuild()!=null){
             WonderStage wonderStage = player.getWonder().checkWhichWonderStageBuild();
             ArrayList<Effect> wonderStageEffects = wonderStage.getEffects();
+            WonderBuildPanel wonderBuildPanel = player.getPlayerPanel().getWonderPanel().getMainWonderPanel().getWonderBuildPanel();
             for (Effect effect : wonderStageEffects) {
                 String effectType = effect.getEffectType();
                 switch (effectType) {
                     case "Culture":
                         CultureEffect cultureEffect = (CultureEffect) effect;
-                        player.addEffect(effectType, cultureEffect);
+                        int wonderPoints = player.getBuiltWonderPoints();
+                        wonderPoints+=cultureEffect.getNumOfPoints();
+                        player.setBuiltWonderPoints(wonderPoints);
                         wonderStage.setBuilt(true);
                         break;
                     case "Army":
@@ -59,6 +63,7 @@ public class UseForWonder implements Action{
 
                 player.getCardsInHand().remove(card);
             }
+            wonderBuildPanel.addBuiltLabel();
             ArrayList<WonderStage> wonderStages=player.getWonderStages();
             wonderStages.add(wonderStage);
             player.setWonderStages(wonderStages);

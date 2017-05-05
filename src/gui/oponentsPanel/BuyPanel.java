@@ -71,11 +71,6 @@ public class BuyPanel extends JPanel{
 
         ArrayList<Effect> resourceEffects = new ArrayList<>(opponent.getResourceEffects());
         ArrayList<Effect> goodEffects = new ArrayList<>(opponent.getGoodEffects());
-        System.out.println(opponent.getResourceEffects().size());
-        System.out.println(opponent.getGoodEffects().size());
-        System.out.println(player.getResourceEffects().size());
-        System.out.println(player.getGoodEffects().size());
-        System.out.println("");
         effects= new ArrayList<>(resourceEffects);
         effects.addAll(goodEffects);
 

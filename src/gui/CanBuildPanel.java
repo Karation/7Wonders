@@ -28,7 +28,9 @@ public class CanBuildPanel extends JPanel{
         //((DefaultListCellRenderer) jList.getCellRenderer()).setOpaque(false);
     }
     public void addToList(String canBuild){
-        model.addElement(canBuild);
+        if (canBuild!=null) {
+            model.addElement(canBuild);
+        }
         this.paintAll(this.getGraphics());
     }
 }

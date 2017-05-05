@@ -7,9 +7,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class TradePanel extends JPanel implements ShowCardOnIcon{
-    GridBagConstraints c = new GridBagConstraints();
-    public TradePanel(){
+/**
+ * Created by mkrec_000 on 04/05/2017.
+ */
+public class GuildPanel extends JPanel implements ShowCardOnIcon{
+    private GridBagConstraints c = new GridBagConstraints();
+    public GuildPanel(){
         this.setOpaque(false);
         this.setBorder(null);
         this.setLayout(new GridBagLayout());
@@ -17,17 +20,16 @@ public class TradePanel extends JPanel implements ShowCardOnIcon{
         c.gridy=0;
         c.anchor=GridBagConstraints.PAGE_START;
     }
-
-    public void addTradeIcon(String tradeName, Card card){
-        JLabel tradeLabel = new JLabel();
-        tradeLabel.setIcon(new ImageIcon("Icons\\"+tradeName+".jpg"));
-        tradeLabel.setBorder(null);
+    public void addIcon(String guildName, Card card){
+        JLabel guildLabel = new JLabel();
+        guildLabel.setIcon(new ImageIcon("Icons\\guildIcons\\"+guildName+".jpg"));
+        guildLabel.setBorder(null);
 
         MouseAdapter mouseAdapter = showCardsImage(card);
-        tradeLabel.addMouseListener(mouseAdapter);
-        this.add(tradeLabel, c);
+        guildLabel.addMouseListener(mouseAdapter);
+        this.add(guildLabel, c);
         c.gridy++;
-        if(c.gridy==3){
+        if(c.gridy==4){
             c.gridy=0;
             c.gridx++;
         }
@@ -35,7 +37,6 @@ public class TradePanel extends JPanel implements ShowCardOnIcon{
 
     @Override
     public MouseAdapter showCardsImage(Card card) {
-
         return new MouseAdapter() {
             JFrame frame;
             @Override

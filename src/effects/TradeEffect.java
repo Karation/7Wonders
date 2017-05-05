@@ -79,4 +79,16 @@ public class TradeEffect extends Effect {
         return 0;
     }
 
+    public int resolveTradePointsEffect(Player player, String tradeEmblem){
+        switch (tradeEmblem) {
+            case "WonderStagesMix":
+                return (player.getWonderStages().size());
+            case "TradeCardsMix":
+                return player.getTradeEffects().size();
+            case "ResourceCardsMix":
+                return player.getResourceEffects().size();
+        }
+        return 0;
+    }
+
 }

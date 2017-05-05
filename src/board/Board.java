@@ -2,11 +2,13 @@ package board;
 
 import cards.*;
 import effects.*;
+import gui.ScoreBoard;
 import gui.oponentsPanel.*;
 import gui.optionalPanels.CardsInGraveChoiceDialog;
 import gui.optionalPanels.UseLastCardDialog;
 import gui.playerPanel.BuildingsPanel;
 import gui.playerPanel.ResourcesPanel;
+import gui.playerPanel.SciencePanel;
 import gui.playerPanel.TradePanel;
 import player.Player;
 import player.action.Action;
@@ -94,17 +96,20 @@ public class Board {
             TradePanel leftTradePanel = leftOponentPanel.getMainWonderPanel().getTradePanel();
             TradePanel rightTradePanel = rightOponentPanel.getMainWonderPanel().getTradePanel();
 
+            SciencePanel leftSciencePanel = leftOponentPanel.getSciencePanel();
+            SciencePanel rightSciencePanel = rightOponentPanel.getSciencePanel();
+
             Action leftPlayerAction = leftPlayer.getAction();
             Action rightPlayerAction = rightPlayer.getAction();
 
             if (leftPlayerAction instanceof Build) {
-                addIconToOpponentPanel(player, leftPlayerCard, leftOpponentBuildingPanel, leftOpponentResourcePanel, leftTradePanel);
+                addIconToOpponentPanel(player, leftPlayerCard, leftOpponentBuildingPanel, leftOpponentResourcePanel, leftTradePanel, leftSciencePanel);
             } else if (leftPlayerAction instanceof Sell) {
                 addMoneyToOpponentPanelFromSell(leftPlayer, leftOpponentBuildingPanel);
             }
 
             if (rightPlayerAction instanceof Build) {
-                addIconToOpponentPanel(player, rightPlayerCard, rightOpponentBuildingPanel, rightOpponentResourcePanel, rightTradePanel);
+                addIconToOpponentPanel(player, rightPlayerCard, rightOpponentBuildingPanel, rightOpponentResourcePanel, rightTradePanel, rightSciencePanel);
             } else if (rightPlayerAction instanceof Sell) {
                 addMoneyToOpponentPanelFromSell(rightPlayer, rightOpponentBuildingPanel);
             }
@@ -138,7 +143,7 @@ public class Board {
 
     }
 
-    public void addIconToOpponentPanel(Player player, Card card, BuildingsPanel opponentsBuildingPanel, ResourcesPanel resourcesPanel, TradePanel tradePanel) {
+    public void addIconToOpponentPanel(Player player, Card card, BuildingsPanel opponentsBuildingPanel, ResourcesPanel resourcesPanel, TradePanel tradePanel, SciencePanel sciencePanel) {
 
         JLabel backgroundPanel = player.getBackgroundPanel();
 
@@ -184,7 +189,7 @@ public class Board {
                 Science science = (Science) card;
                 ScienceEffect scienceEffect = (ScienceEffect) science.getScienceEffect();
                 String symbol = scienceEffect.getScienceSymbol();
-                opponentsBuildingPanel.addScienceIcon(symbol, science);
+                sciencePanel.addScienceIcon(symbol, science);
                 backgroundPanel.paintAll(backgroundPanel.getGraphics());
                 break;
             case "Trade":
@@ -269,6 +274,8 @@ public class Board {
                 ArrayList<Card> cardsAge3 = deck.loadCards(FILEPATH_3);
                 ArrayList<Card> guilds = deck.loadCards(GUILDS);
                 deck.dealCards(deck.addGuildsToDeck(guilds, cardsAge3, players.size()), players);
+            }else if(age==4){
+                endGame();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -279,6 +286,13 @@ public class Board {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void endGame() {
+        ScoreBoard scoreFrame;
+        for (Player player : players) {
+            scoreFrame=new ScoreBoard(players);
         }
     }
 
