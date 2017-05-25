@@ -3,67 +3,68 @@ package wonders;
 import effects.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import static java.util.Arrays.asList;
 
 public enum Wonders {
 
     ALEXANDRIA_A(new WondersBuilder("Alexandria", EffectFactory.create("Good", "Glass"), "WondersPictures\\AlexandriaA.jpg")
-            .addEffect(new WonderStage(1, "SS", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "3")))))
-            .addEffect(new WonderStage(2, "OO", new ArrayList<>(Arrays.asList(EffectFactory.create("Trade", "ResourceProduction")))))
-            .addEffect(new WonderStage(3, "GG", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "7")))))),
+            .addEffect(new WonderStage(1, "SS", new ArrayList<>(asList(EffectFactory.create("Culture", "3")))))
+            .addEffect(new WonderStage(2, "OO", new ArrayList<>(asList(EffectFactory.create("Trade", "ResourceProduction")))))
+            .addEffect(new WonderStage(3, "GG", new ArrayList<>(asList(EffectFactory.create("Culture", "7")))))),
     ALEXANDRIA_B(new WondersBuilder("Alexandria", EffectFactory.create("Good", "Glass"), "WondersPictures\\AlexandriaB.jpg")
-            .addEffect(new WonderStage(1, "ZZ", new ArrayList<>(Arrays.asList(EffectFactory.create("Trade", "ResourceProduction")))))
-            .addEffect(new WonderStage(2, "WW", new ArrayList<>(Arrays.asList(EffectFactory.create("Trade", "GoodProduction")))))
-            .addEffect(new WonderStage(3, "SSS", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "7")))))),
+            .addEffect(new WonderStage(1, "ZZ", new ArrayList<>(asList(EffectFactory.create("Trade", "ResourceProduction")))))
+            .addEffect(new WonderStage(2, "WW", new ArrayList<>(asList(EffectFactory.create("Trade", "GoodProduction")))))
+            .addEffect(new WonderStage(3, "SSS", new ArrayList<>(asList(EffectFactory.create("Culture", "7")))))),
     EPHESOS_A(new WondersBuilder("Ephesos", EffectFactory.create("Good", "Paper"), "WondersPictures\\EphesosA.jpg")
-            .addEffect(new WonderStage(1, "SS", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "3")))))
-            .addEffect(new WonderStage(2, "WW", new ArrayList<>(Arrays.asList(EffectFactory.create("Money", "9")))))
-            .addEffect(new WonderStage(3, "PP", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "7")))))),
+            .addEffect(new WonderStage(1, "SS", new ArrayList<>(asList(EffectFactory.create("Culture", "3")))))
+            .addEffect(new WonderStage(2, "WW", new ArrayList<>(asList(EffectFactory.create("Money", "9")))))
+            .addEffect(new WonderStage(3, "PP", new ArrayList<>(asList(EffectFactory.create("Culture", "7")))))),
     EPHESOS_B(new WondersBuilder("Ephesos", EffectFactory.create("Good", "Paper"), "WondersPictures\\EphesosB.jpg")
-            .addEffect(new WonderStage(1, "SS", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "2"), EffectFactory.create("Money", "4")))))
-            .addEffect(new WonderStage(2, "WW", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "3"), EffectFactory.create("Money", "4")))))
-            .addEffect(new WonderStage(3, "PCG", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "5"), EffectFactory.create("Money", "4")))))),
+            .addEffect(new WonderStage(1, "SS", new ArrayList<>(asList(EffectFactory.create("Culture", "2"), EffectFactory.create("Money", "4")))))
+            .addEffect(new WonderStage(2, "WW", new ArrayList<>(asList(EffectFactory.create("Culture", "3"), EffectFactory.create("Money", "4")))))
+            .addEffect(new WonderStage(3, "PCG", new ArrayList<>(asList(EffectFactory.create("Culture", "5"), EffectFactory.create("Money", "4")))))),
     RHODOS_A(new WondersBuilder("Rhodos", EffectFactory.create("Resource", "Ore"), "WondersPictures\\RhodosA.jpg")
-            .addEffect(new WonderStage(1, "WW", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "3")))))
-            .addEffect(new WonderStage(2, "ZZZ", new ArrayList<>(Arrays.asList(EffectFactory.create("Army", "2")))))
-            .addEffect(new WonderStage(3, "OOOO", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "7")))))),
+            .addEffect(new WonderStage(1, "WW", new ArrayList<>(asList(EffectFactory.create("Culture", "3")))))
+            .addEffect(new WonderStage(2, "ZZZ", new ArrayList<>(asList(EffectFactory.create("Army", "2")))))
+            .addEffect(new WonderStage(3, "OOOO", new ArrayList<>(asList(EffectFactory.create("Culture", "7")))))),
     RHODOS_B(new WondersBuilder("Rhodos", EffectFactory.create("Resource", "Ore"), "WondersPictures\\RhodosB.jpg")
-            .addEffect(new WonderStage(1, "SSS", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "3"), EffectFactory.create("Army", "1"), EffectFactory.create("Money", "3")))))
-            .addEffect(new WonderStage(2, "OOOO", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "4"), EffectFactory.create("Army", "1"), EffectFactory.create("Money", "4")))))),
+            .addEffect(new WonderStage(1, "SSS", new ArrayList<>(asList(EffectFactory.create("Culture", "3"), EffectFactory.create("Army", "1"), EffectFactory.create("Money", "3")))))
+            .addEffect(new WonderStage(2, "OOOO", new ArrayList<>(asList(EffectFactory.create("Culture", "4"), EffectFactory.create("Army", "1"), EffectFactory.create("Money", "4")))))),
     OLYMPIA_A(new WondersBuilder("Olympia", EffectFactory.create("Resource", "Wood"), "WondersPictures\\OlympiaA.jpg")
-            .addEffect(new WonderStage(1, "WW", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "3")))))
-            .addEffect(new WonderStage(2, "SS", new ArrayList<>(Arrays.asList(EffectFactory.create("WonderEffect", "BuildForFree")))))
-            .addEffect(new WonderStage(3, "OO", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "7")))))),
+            .addEffect(new WonderStage(1, "WW", new ArrayList<>(asList(EffectFactory.create("Culture", "3")))))
+            .addEffect(new WonderStage(2, "SS", new ArrayList<>(asList(EffectFactory.create("WonderEffect", "BuildForFree")))))
+            .addEffect(new WonderStage(3, "OO", new ArrayList<>(asList(EffectFactory.create("Culture", "7")))))),
     OLYMPIA_B(new WondersBuilder("Olympia", EffectFactory.create("Resource", "Wood"), "WondersPictures\\OlympiaB.jpg")
-            .addEffect(new WonderStage(1, "WW", new ArrayList<>(Arrays.asList(EffectFactory.create("Trade", "ResourceTrade")))))
-            .addEffect(new WonderStage(2, "SS", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "5")))))
-            .addEffect(new WonderStage(3, "COO", new ArrayList<>(Arrays.asList(EffectFactory.create("WonderEffect", "CopyGuild")))))),
+            .addEffect(new WonderStage(1, "WW", new ArrayList<>(asList(EffectFactory.create("Trade", "ResourceTrade")))))
+            .addEffect(new WonderStage(2, "SS", new ArrayList<>(asList(EffectFactory.create("Culture", "5")))))
+            .addEffect(new WonderStage(3, "COO", new ArrayList<>(asList(EffectFactory.create("WonderEffect", "CopyGuild")))))),
     GIZA_A(new WondersBuilder("Giza", EffectFactory.create("Resource", "Stone"), "WondersPictures\\GizaA.jpg")
-            .addEffect(new WonderStage(1, "SS", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "3")))))
-            .addEffect(new WonderStage(2, "WWW", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "5")))))
-            .addEffect(new WonderStage(3, "SSSS", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "7")))))),
+            .addEffect(new WonderStage(1, "SS", new ArrayList<>(asList(EffectFactory.create("Culture", "3")))))
+            .addEffect(new WonderStage(2, "WWW", new ArrayList<>(asList(EffectFactory.create("Culture", "5")))))
+            .addEffect(new WonderStage(3, "SSSS", new ArrayList<>(asList(EffectFactory.create("Culture", "7")))))),
     GIZA_B(new WondersBuilder("Giza", EffectFactory.create("Resource", "Stone"), "WondersPictures\\GizaB.jpg")
-            .addEffect(new WonderStage(1, "WW", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "3")))))
-            .addEffect(new WonderStage(2, "SSS", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "5")))))
-            .addEffect(new WonderStage(3, "ZZZ", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "5")))))
-            .addEffect(new WonderStage(4, "CSSSS", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "7")))))),
+            .addEffect(new WonderStage(1, "WW", new ArrayList<>(asList(EffectFactory.create("Culture", "3")))))
+            .addEffect(new WonderStage(2, "SSS", new ArrayList<>(asList(EffectFactory.create("Culture", "5")))))
+            .addEffect(new WonderStage(3, "ZZZ", new ArrayList<>(asList(EffectFactory.create("Culture", "5")))))
+            .addEffect(new WonderStage(4, "CSSSS", new ArrayList<>(asList(EffectFactory.create("Culture", "7")))))),
     HALICARNASSOS_A(new WondersBuilder("Halicarnassos", EffectFactory.create("Good", "Cloth"), "WondersPictures\\HalicarnassosA.jpg")
-            .addEffect(new WonderStage(1, "ZZ", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "3")))))
-            .addEffect(new WonderStage(2, "OOO", new ArrayList<>(Arrays.asList(EffectFactory.create("WonderEffect", "BuildFromGrave")))))
-            .addEffect(new WonderStage(3, "CC", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "7")))))),
+            .addEffect(new WonderStage(1, "ZZ", new ArrayList<>(asList(EffectFactory.create("Culture", "3")))))
+            .addEffect(new WonderStage(2, "OOO", new ArrayList<>(asList(EffectFactory.create("WonderEffect", "BuildFromGrave")))))
+            .addEffect(new WonderStage(3, "CC", new ArrayList<>(asList(EffectFactory.create("Culture", "7")))))),
     HALICARNASSOS_B(new WondersBuilder("Halicarnassos", EffectFactory.create("Good", "Cloth"), "WondersPictures\\HalicarnassosB.jpg")
-            .addEffect(new WonderStage(1, "OO", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "2"),EffectFactory.create("WonderEffect", "BuildFromGrave")))))
-            .addEffect(new WonderStage(2, "ZZZ", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "1"),EffectFactory.create("WonderEffect", "BuildFromGrave")))))
-            .addEffect(new WonderStage(3, "GCP", new ArrayList<>(Arrays.asList(EffectFactory.create("WonderEffect", "BuildFromGrave")))))),
+            .addEffect(new WonderStage(1, "OO", new ArrayList<>(asList(EffectFactory.create("Culture", "2"),EffectFactory.create("WonderEffect", "BuildFromGrave")))))
+            .addEffect(new WonderStage(2, "ZZZ", new ArrayList<>(asList(EffectFactory.create("Culture", "1"),EffectFactory.create("WonderEffect", "BuildFromGrave")))))
+            .addEffect(new WonderStage(3, "GCP", new ArrayList<>(asList(EffectFactory.create("WonderEffect", "BuildFromGrave")))))),
     BABYLON_A(new WondersBuilder("Babylon", EffectFactory.create("Resource", "Clay"), "WondersPictures\\BabylonA.jpg")
-            .addEffect(new WonderStage(1, "ZZ", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "3")))))
-            .addEffect(new WonderStage(2, "WWW", new ArrayList<>(Arrays.asList(EffectFactory.create("WonderEffect", "ChooseScienceSymbol")))))
-            .addEffect(new WonderStage(3, "ZZZZ", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "7")))))),
+            .addEffect(new WonderStage(1, "ZZ", new ArrayList<>(asList(EffectFactory.create("Culture", "3")))))
+            .addEffect(new WonderStage(2, "WWW", new ArrayList<>(asList(EffectFactory.create("WonderEffect", "ChooseScienceSymbol")))))
+            .addEffect(new WonderStage(3, "ZZZZ", new ArrayList<>(asList(EffectFactory.create("Culture", "7")))))),
     BABYLON_B(new WondersBuilder("Babylon", EffectFactory.create("Resource", "Clay"), "WondersPictures\\BabylonB.jpg")
-            .addEffect(new WonderStage(1, "CZ", new ArrayList<>(Arrays.asList(EffectFactory.create("Culture", "3")))))
-            .addEffect(new WonderStage(2, "GWW", new ArrayList<>(Arrays.asList(EffectFactory.create("WonderEffect", "UseLastCard")))))
-            .addEffect(new WonderStage(3, "PZZZ", new ArrayList<>(Arrays.asList(EffectFactory.create("WonderEffect", "ChooseScienceSymbol"))))));
+            .addEffect(new WonderStage(1, "CZ", new ArrayList<>(asList(EffectFactory.create("Culture", "3")))))
+            .addEffect(new WonderStage(2, "GWW", new ArrayList<>(asList(EffectFactory.create("WonderEffect", "UseLastCard")))))
+            .addEffect(new WonderStage(3, "PZZZ", new ArrayList<>(asList(EffectFactory.create("WonderEffect", "ChooseScienceSymbol"))))));
 
     private String name;
     private List<WonderStage> wonderStages;
@@ -73,7 +74,7 @@ public enum Wonders {
     public static void main(String[] args){addWondersToArray();}
 
 
-    private Wonders(WondersBuilder builder){
+    Wonders(WondersBuilder builder){
         this.name = builder.name;
         this.production = builder.production;
         this.imagePath = builder.imagePath;
@@ -97,13 +98,13 @@ public enum Wonders {
 
         ArrayList<ArrayList<Wonders>> wonders = new ArrayList<>();
 
-        ArrayList<Wonders> ephesosSides = new ArrayList<>(Arrays.asList(EPHESOS_A, EPHESOS_B));
-        ArrayList<Wonders> alexandrySides = new ArrayList<>(Arrays.asList(ALEXANDRIA_A, ALEXANDRIA_B));
-        ArrayList<Wonders> rhodosSides = new ArrayList<>(Arrays.asList(RHODOS_A, RHODOS_B));
-        ArrayList<Wonders> babylonSides = new ArrayList<>(Arrays.asList(BABYLON_A, BABYLON_B));
-        ArrayList<Wonders> gizaSides = new ArrayList<>(Arrays.asList(GIZA_A, GIZA_B));
-        ArrayList<Wonders> halicarnassosSides = new ArrayList<>(Arrays.asList(HALICARNASSOS_A, HALICARNASSOS_B));
-        ArrayList<Wonders> olympiaSides = new ArrayList<>(Arrays.asList(OLYMPIA_A, OLYMPIA_B));
+        ArrayList<Wonders> ephesosSides = new ArrayList<>(asList(EPHESOS_A, EPHESOS_B));
+        ArrayList<Wonders> alexandrySides = new ArrayList<>(asList(ALEXANDRIA_A, ALEXANDRIA_B));
+        ArrayList<Wonders> rhodosSides = new ArrayList<>(asList(RHODOS_A, RHODOS_B));
+        ArrayList<Wonders> babylonSides = new ArrayList<>(asList(BABYLON_A, BABYLON_B));
+        ArrayList<Wonders> gizaSides = new ArrayList<>(asList(GIZA_A, GIZA_B));
+        ArrayList<Wonders> halicarnassosSides = new ArrayList<>(asList(HALICARNASSOS_A, HALICARNASSOS_B));
+        ArrayList<Wonders> olympiaSides = new ArrayList<>(asList(OLYMPIA_A, OLYMPIA_B));
 
         wonders.add(alexandrySides);
         wonders.add(ephesosSides);
@@ -132,9 +133,9 @@ public enum Wonders {
     public WonderStage checkWhichWonderStageBuild(){
         ArrayList<WonderStage> stages = (ArrayList<WonderStage>) this.getWonderStages();
         WonderStage stageToBuild;
-        for (int i = 0; i < stages.size(); i++) {
-            if (!stages.get(i).IsBuilt()){
-                stageToBuild=stages.get(i);
+        for (WonderStage stage : stages) {
+            if (!stage.IsBuilt()) {
+                stageToBuild = stage;
                 return stageToBuild;
             }
         }
@@ -158,10 +159,10 @@ public enum Wonders {
             return this;
         }
 
-        WondersBuilder addEffects(WonderStage... effect) {
-            this.wonderStages.addAll(wonderStages);
-            return this;
-        }
+//        WondersBuilder addEffects(WonderStage... effect) {
+//            this.wonderStages.addAll(wonderStages);
+//            return this;
+//        }
 
     }
 }

@@ -4,9 +4,7 @@ import effects.Effect;
 
 import java.awt.*;
 
-/**
- * Created by mkrec_000 on 22/02/2017.
- */
+
 public class Army extends Card{
     private Effect armyEffect;
     private String canBuild;

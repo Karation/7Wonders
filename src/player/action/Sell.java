@@ -2,17 +2,13 @@ package player.action;
 
 import cards.Card;
 import gui.playerPanel.BuildingsPanel;
-import gui.playerPanel.ResourcesPanel;
 import gui.playerPanel.WonderPanel;
 import player.Player;
 
 import java.util.ArrayList;
 
-/**
- * Created by mkrec_000 on 26/03/2017.
- */
 public class Sell implements Action{
-    int index;
+    private int index;
 
     public Sell(int index) {
         this.index=index;
@@ -32,7 +28,4 @@ public class Sell implements Action{
         player.setCardsInHand(cardsInHand);
     }
 
-    public int getIndex() {
-        return index;
-    }
 }

@@ -9,7 +9,6 @@ import wonders.WonderStage;
 import wonders.Wonders;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -244,7 +243,7 @@ public class Player {
             } else if (temp == 'Z') {//Clay
                 found.add(findInResourceEffectsArray("Clay"));
             } else if (temp == '1') {//1 Money
-                found.add(checkIfEnoughMoney("1"));
+                found.add(checkIfEnoughMoney());
             }
         }
         refreshGoodsResourcesAndTradeEffects();
@@ -252,7 +251,7 @@ public class Player {
         return found;
     }
 
-    private Boolean checkIfEnoughMoney(String s) {
+    private Boolean checkIfEnoughMoney() {
         int money = this.getMoney();
         return money >= 1;
     }
@@ -440,10 +439,6 @@ public class Player {
         return backgroundPanel;
     }
 
-    public GridBagConstraints getConstraints() {
-        return constraints;
-    }
-
     private void setConstraints(GridBagConstraints constraints) {
         this.constraints = constraints;
     }
@@ -528,38 +523,6 @@ public class Player {
         return copiedCardsInHand;
     }
 
-    public ArrayList<Effect> getCopiedResourceEffects() {
-        return copiedResourceEffects;
-    }
-
-    public ArrayList<Effect> getCopiedGoodEffects() {
-        return copiedGoodEffects;
-    }
-
-    public void setCopiedResourceEffects(ArrayList<Effect> copiedResourceEffects) {
-        this.copiedResourceEffects = copiedResourceEffects;
-    }
-
-    public void setCopiedGoodEffects(ArrayList<Effect> copiedGoodEffects) {
-        this.copiedGoodEffects = copiedGoodEffects;
-    }
-
-    public ArrayList<Effect> getCopiedBoughtResourceEffects() {
-        return copiedBoughtResourceEffects;
-    }
-
-    public void setCopiedBoughtResourceEffects(ArrayList<Effect> copiedBoughtResourceEffects) {
-        this.copiedBoughtResourceEffects = copiedBoughtResourceEffects;
-    }
-
-    public ArrayList<Effect> getCopiedBoughtGoodEffects() {
-        return copiedBoughtGoodEffects;
-    }
-
-    public void setCopiedBoughtGoodEffects(ArrayList<Effect> copiedBoughtGoodEffects) {
-        this.copiedBoughtGoodEffects = copiedBoughtGoodEffects;
-    }
-
     public ArrayList<Effect> getBoughtResourceEffects() {
         return boughtResourceEffects;
     }
@@ -576,20 +539,8 @@ public class Player {
         this.boughtGoodEffects = boughtGoodEffects;
     }
 
-    public void setResourceEffects(ArrayList<Effect> resourceEffects) {
-        this.resourceEffects = resourceEffects;
-    }
-
-    public void setGoodEffects(ArrayList<Effect> goodEffects) {
-        this.goodEffects = goodEffects;
-    }
-
     public ArrayList<Effect> getArmyEffects() {
         return armyEffects;
-    }
-
-    public void setArmyEffects(ArrayList<Effect> armyEffects) {
-        this.armyEffects = armyEffects;
     }
 
     public ArrayList<Effect> getResourceEffects() {
@@ -640,10 +591,6 @@ public class Player {
         return wonderEffects;
     }
 
-    public void setWonderEffects(ArrayList<Effect> wonderEffects) {
-        this.wonderEffects = wonderEffects;
-    }
-
     public boolean isUsedBuildForFreeEffect() {
         return usedBuildForFreeEffect;
     }
@@ -654,10 +601,6 @@ public class Player {
 
     public ArrayList<String> getCanBuildArray() {
         return canBuild;
-    }
-
-    public void setCanBuildArray(ArrayList<String> canBuild) {
-        this.canBuild = canBuild;
     }
 
     public ArrayList<Effect> getCultureEffects() {

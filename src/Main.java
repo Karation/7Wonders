@@ -1,50 +1,43 @@
 
 import board.Board;
-import cards.Card;
 import cards.Deck;
-import effects.Effect;
 import gui.InitialGui;
 import gui.WonderChoiceThread;
 import player.Player;
 import wonders.Wonders;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    InitialGui initialGui;
-    Deck deck;
-    Board board;
-    ArrayList<ArrayList<Wonders>> wonders;
-    ArrayList<Wonders> wonderSides;
-    List<WonderChoiceThread> threads = new ArrayList<>();
-    ArrayList<Wonders> chosenWonders=new ArrayList<>();
-    ArrayList<Player> players= new ArrayList<>();
-    String filepath = "cards1.txt";
-    int numOfPlayers =3 ;
+    private Board board;
+    private List<WonderChoiceThread> threads = new ArrayList<>();
+    private ArrayList<Wonders> chosenWonders=new ArrayList<>();
+    private ArrayList<Player> players= new ArrayList<>();
+    private static final String FILEPATH = "cards1.txt";
+    private static int numOfPlayers =3 ;
     public static void main(String[] args) throws IOException, InterruptedException {
         new Main().start();
     }
 
-    public void start() throws IOException, InterruptedException {
-        deck = new Deck();
+    private void start() throws IOException, InterruptedException {
+        Deck deck = new Deck();
         createBoardAndPlayers();
-        deck.dealCards(deck.shuffle(deck.loadCards(filepath)), players);
+        deck.dealCards(deck.shuffle(deck.loadCards(FILEPATH)), players);
         dealAndChooseWonders();
 
         for(int i = 0; i < 3; i++){
             Player player=players.get(i);
-            initialGui = new InitialGui(player, player.getCardsInHand(), player.getWonder());
+            new InitialGui(player, player.getCardsInHand(), player.getWonder());
         }
     }
 
     private void dealAndChooseWonders() throws InterruptedException {
-        wonders= Wonders.addWondersToArray();
-        wonders=Wonders.shuffleWonders(wonders);
+        ArrayList<ArrayList<Wonders>> wonders = Wonders.addWondersToArray();
+        wonders =Wonders.shuffleWonders(wonders);
         for (int i = 0; i < 3; i++) {
-            wonderSides=Wonders.dealWonders(wonders);
+            ArrayList<Wonders> wonderSides = Wonders.dealWonders(wonders);
             WonderChoiceThread thread = new WonderChoiceThread(wonderSides, chosenWonders);
             thread.start();
             threads.add(thread);
@@ -53,6 +46,9 @@ public class Main {
         while(chosenWonders.size()<3){
             Thread.sleep(2000);
             System.out.println("czekam");
+        }
+        for (WonderChoiceThread thread : threads) {
+            thread.join();
         }
         for (int i = 0; i < 3; i++) {
             Player player=players.get(i);

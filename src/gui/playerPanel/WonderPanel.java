@@ -1,23 +1,21 @@
 package gui.playerPanel;
 
-import cards.Card;
+
 import gui.ArmyPointsPanel;
 import wonders.Wonders;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 public class WonderPanel extends JPanel{
-    ResourcesPanel resourcesPanel;
-    BuildingsPanel buildingsPanel;
-    MainWonderPanel mainWonderPanel;
-    ArmyPointsPanel armyPointsPanel;
-    SciencePanel sciencePanel;
+    private ResourcesPanel resourcesPanel;
+    private BuildingsPanel buildingsPanel;
+    private MainWonderPanel mainWonderPanel;
+    private ArmyPointsPanel armyPointsPanel;
+    private SciencePanel sciencePanel;
 
 
-    public WonderPanel(Wonders wonder) throws IOException {
+    WonderPanel(Wonders wonder) throws IOException {
         this.setOpaque(false);
         this.setBorder(null);
         setLayout(new GridBagLayout());

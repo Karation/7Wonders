@@ -8,8 +8,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class TradePanel extends JPanel implements ShowCardOnIcon{
-    GridBagConstraints c = new GridBagConstraints();
-    public TradePanel(){
+    private GridBagConstraints c = new GridBagConstraints();
+    TradePanel(){
         this.setOpaque(false);
         this.setBorder(null);
         this.setLayout(new GridBagLayout());

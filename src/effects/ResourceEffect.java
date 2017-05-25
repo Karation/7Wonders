@@ -1,9 +1,9 @@
 package effects;
 
 public class ResourceEffect extends Effect{
-    String resourceType;
+    private String resourceType;
 
-    public ResourceEffect(String effectType, String resourceType) {
+    ResourceEffect(String effectType, String resourceType) {
         super(effectType);
         this.resourceType = resourceType;
     }

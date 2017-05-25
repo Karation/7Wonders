@@ -4,9 +4,6 @@ import effects.Effect;
 
 import java.awt.*;
 
-/**
- * Created by mkrec_000 on 22/02/2017.
- */
 public class Trade extends Card{
     private Effect tradeEffect;
     private String canBuild;
@@ -27,7 +24,4 @@ public class Trade extends Card{
         return canBuild;
     }
 
-    public void setCanBuild(String canBuild) {
-        this.canBuild = canBuild;
-    }
 }

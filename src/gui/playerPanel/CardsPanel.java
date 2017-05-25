@@ -21,8 +21,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class CardsPanel extends JPanel {
-    boolean didChoose = false;
-    JComboBox options;
+    private boolean didChoose = false;
+    private JComboBox options;
     private AcceptButton acceptButton;
 
     public CardsPanel(ArrayList<Card> cards, Player player) throws IOException {
@@ -95,7 +95,7 @@ public class CardsPanel extends JPanel {
             cardPanel.setOpaque(false);
         }
 
-        acceptButton = new AcceptButton(player, this);
+        acceptButton = new AcceptButton(player);
         this.add(acceptButton, c);
         this.paintAll(this.getGraphics());
 
@@ -104,9 +104,9 @@ public class CardsPanel extends JPanel {
 
     private String[] checkForBuildForFreeEffect(Player player) {
         ArrayList<Effect> wonderEffects = player.getWonderEffects();
-        for (int i = 0; i < wonderEffects.size(); i++) {
-            WonderEffect wonderEffect =(WonderEffect) wonderEffects.get(i);
-            if (wonderEffect.getEffectName().equals("BuildForFree")&& !player.isUsedBuildForFreeEffect()){
+        for (Effect wonderEffect1 : wonderEffects) {
+            WonderEffect wonderEffect = (WonderEffect) wonderEffect1;
+            if (wonderEffect.getEffectName().equals("BuildForFree") && !player.isUsedBuildForFreeEffect()) {
                 return new String[]{"Build", "Sell", "Wonder", "BuildForFree"};
             }
         }
@@ -157,8 +157,8 @@ public class CardsPanel extends JPanel {
 
     private boolean checkIfCanBuildFromCard(Player player, Card card) {
         ArrayList<String> canBuild = player.getCanBuildArray();
-        for (int i = 0; i < canBuild.size(); i++) {
-            if (canBuild.get(i).equals(card.getName())){
+        for (String aCanBuild : canBuild) {
+            if (aCanBuild.equals(card.getName())) {
                 return true;
             }
         }

@@ -4,9 +4,7 @@ import effects.Effect;
 
 import java.awt.*;
 
-/**
- * Created by mkrec_000 on 22/02/2017.
- */
+
 public class Culture extends Card{
     private Effect cultureEffect;
     private String canBuild;

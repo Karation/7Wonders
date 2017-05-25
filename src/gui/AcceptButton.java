@@ -12,9 +12,9 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class AcceptButton extends JToggleButton{
-    Boolean choice;
-    JPanel glassPane = new JPanel();
-    public AcceptButton(Player player, CardsPanel cardsPanel){
+    private Boolean choice;
+    //JPanel glassPane = new JPanel();
+    public AcceptButton(Player player){
         this.setText("Accept");
         this.setEnabled(false);
         this.addActionListener(new ActionListener() {

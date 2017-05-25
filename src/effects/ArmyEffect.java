@@ -1,12 +1,9 @@
 package effects;
 
-/**
- * Created by mkrec_000 on 28/03/2017.
- */
 public class ArmyEffect extends Effect{
-    int numOfShields;
+    private int numOfShields;
 
-    public ArmyEffect(String effectType, int numOfShields) {
+    ArmyEffect(String effectType, int numOfShields) {
         super(effectType);
         this.numOfShields = numOfShields;
     }

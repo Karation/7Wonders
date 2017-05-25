@@ -3,8 +3,6 @@ package gui.playerPanel;
 import cards.Army;
 import cards.Card;
 import cards.Culture;
-import cards.Science;
-import player.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,9 +10,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-/**
- * Created by mkrec_000 on 13/03/2017.
- */
 public class BuildingsPanel extends JPanel implements ShowCardOnIcon {
     private JLabel armyLabel;
     private JLabel pointsLabel;
@@ -25,7 +20,7 @@ public class BuildingsPanel extends JPanel implements ShowCardOnIcon {
     private int numOfShields = 0;
     private int numOfPoints = 0;
     private int money;
-    private int startingMoney = 3;
+    private static final int STARTING_MONEY = 3;
 
     public BuildingsPanel() {
 
@@ -56,7 +51,7 @@ public class BuildingsPanel extends JPanel implements ShowCardOnIcon {
         moneyLabel = new JLabel();
         moneyLabel.setIcon(new ImageIcon("Icons\\Money.jpg"));
         moneyLabel.setHorizontalTextPosition(JLabel.CENTER);
-        moneyLabel.setText(String.valueOf(startingMoney));
+        moneyLabel.setText(String.valueOf(STARTING_MONEY));
         this.add(moneyLabel, c);
 
     }
@@ -79,10 +74,6 @@ public class BuildingsPanel extends JPanel implements ShowCardOnIcon {
         cultureCards.add(culture);
         MouseAdapter mouseAdapter = showCardsImage(culture);
         pointsLabel.addMouseListener(mouseAdapter);
-    }
-
-    public void addMoney(int numOfMoney) {
-        moneyLabel.setText(String.valueOf(numOfMoney));
     }
 
     public void substractMoney(int amount) {

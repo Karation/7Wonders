@@ -8,12 +8,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 
 
 public class ResourcesPanel  extends JPanel implements ShowCardOnIcon{
-    JPanel resourcesPanel;
-    JPanel goodsPanel;
+    private JPanel resourcesPanel;
+    private JPanel goodsPanel;
     public ResourcesPanel(){
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();

@@ -2,12 +2,10 @@ package gui;
 
 import cards.Card;
 import gui.oponentsPanel.OpponentPanel;
-import gui.playerPanel.PlayerPanel;
 import player.Player;
 import wonders.Wonders;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +13,6 @@ import java.util.ArrayList;
 
 public class InitialGui {
     private static final String BACKGROUND_IMAGE_PATH = "Galaxy.jpg";
-    PlayerPanel playerPanel;
 
     public InitialGui(Player player, ArrayList<Card> cards, Wonders wonder) throws IOException{
         JFrame frame = new JFrame();
@@ -46,7 +43,7 @@ public class InitialGui {
         c.gridy++;
         c.weighty=1;
         c.anchor=GridBagConstraints.PAGE_END;
-        playerPanel=player.start(mainPanel, c, cards, wonder);
+        player.start(mainPanel, c, cards, wonder);
 
         frame.add(mainPanel);
         frame.setLocationByPlatform(true);

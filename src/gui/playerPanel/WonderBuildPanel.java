@@ -1,18 +1,20 @@
 package gui.playerPanel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-/**
- * Created by mkrec_000 on 04/05/2017.
- */
 public class WonderBuildPanel extends JPanel{
-    private GridBagConstraints c = new GridBagConstraints();
+    //private GridBagConstraints c = new GridBagConstraints();
     private JLabel stage1;
     private JLabel stage2;
     private JLabel stage3;
     private JLabel stage4;
-    WonderBuildPanel(int wonderStages){
+    private BufferedImage builtImage = ImageIO.read(new File("Icons\\okey.png"));
+    WonderBuildPanel(int wonderStages) throws IOException {
         this.setOpaque(false);
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.setBorder(null);
@@ -20,10 +22,8 @@ public class WonderBuildPanel extends JPanel{
         createJLabelsForWonders(wonderStages);
 
     }
-    public void addBuiltLabel(){
 
-    }
-    public void createJLabelsForWonders(int numOfStages){
+    private void createJLabelsForWonders(int numOfStages){
         if (numOfStages == 3){
             this.add(Box.createHorizontalStrut(30));
 
@@ -91,5 +91,22 @@ public class WonderBuildPanel extends JPanel{
             this.add(Box.createHorizontalStrut(10));
         }
     }
+    public void addBuiltLabel(int stage){
+        switch (stage){
+            case (1):
+                stage1.setIcon(new ImageIcon(builtImage));
+                break;
+            case(2):
+                stage2.setIcon(new ImageIcon(builtImage));
+                break;
+            case(3):
+                stage3.setIcon(new ImageIcon(builtImage));
+                break;
+            case(4):
+                stage4.setIcon(new ImageIcon(builtImage));
+                break;
+        }
+    }
+
 
 }

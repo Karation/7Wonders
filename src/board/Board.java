@@ -28,7 +28,6 @@ public class Board {
     private List<Boolean> choices;
     private ArrayList<Card> cardsInGrave = new ArrayList<>();
     private int age = 1;
-    private Deck deck;
     private final static String FILEPATH_2 ="cards2.txt";
     private final static String FILEPATH_3 ="cards3.txt";
     private final static String GUILDS ="guilds.txt";
@@ -38,9 +37,9 @@ public class Board {
         choices = new ArrayList<>(players.size());
     }
 
-    public Player getPlayer(int i) {
-        return players.get(i);
-    }
+//    public Player getPlayer(int i) {
+//        return players.get(i);
+//    }
 
     public void addToChoicesArray(Boolean choice) {
         choices.add(choice);
@@ -52,9 +51,9 @@ public class Board {
 
     public boolean resolveActions() {
         Set<Boolean> flags = new HashSet<>(choices);
-        for (int i = 0; i < players.size(); i++) { //Check for useLastCardEffect
-            if (players.get(i).getCardsInHand().size() == 1) {
-                players.get(i).startAction();
+        for (Player player1 : players) { //Check for useLastCardEffect
+            if (player1.getCardsInHand().size() == 1) {
+                player1.startAction();
                 updateOpponentsPanel();
                 return true;
             }
@@ -120,7 +119,7 @@ public class Board {
         }
     }
 
-    public void updateBuyPanel(Player leftOpponent, Player rightOpponent, Player player, LeftOponentPanel leftOponentPanel, RightOponentPanel rightOponentPanel) {
+    private void updateBuyPanel(Player leftOpponent, Player rightOpponent, Player player, LeftOponentPanel leftOponentPanel, RightOponentPanel rightOponentPanel) {
         GridBagConstraints c = new GridBagConstraints();
 
         BuyPanel leftBuyPanel = new BuyPanel(leftOpponent, player, leftOponentPanel);
@@ -143,7 +142,7 @@ public class Board {
 
     }
 
-    public void addIconToOpponentPanel(Player player, Card card, BuildingsPanel opponentsBuildingPanel, ResourcesPanel resourcesPanel, TradePanel tradePanel, SciencePanel sciencePanel) {
+    private void addIconToOpponentPanel(Player player, Card card, BuildingsPanel opponentsBuildingPanel, ResourcesPanel resourcesPanel, TradePanel tradePanel, SciencePanel sciencePanel) {
 
         JLabel backgroundPanel = player.getBackgroundPanel();
 
@@ -202,12 +201,12 @@ public class Board {
         }
     }
 
-    public void addMoneyToOpponentPanel(Player opponent, BuildingsPanel buildingsPanel) {
+    private void addMoneyToOpponentPanel(Player opponent, BuildingsPanel buildingsPanel) {
         int money = opponent.getMoney();
         buildingsPanel.updateMoneyIcon(money);
     }
 
-    public void addMoneyToOpponentPanelFromSell(Player opponent, BuildingsPanel buildingsPanel) {
+    private void addMoneyToOpponentPanelFromSell(Player opponent, BuildingsPanel buildingsPanel) {
         int money = opponent.getMoney();
         money += 3;
         buildingsPanel.updateMoneyIcon(money);
@@ -219,18 +218,19 @@ public class Board {
         int money = player.getMoney();
         money += moneyForBoughtItems;
         player.setMoney(money);
-        player.setMoneyToBeTransfered(0);
+        money = 0;
+        player.setMoneyToBeTransfered(money);
         player.getPlayerPanel().getWonderPanel().getBuildingsPanel().updateMoneyIcon(money);
     }
 
     public void nextTurn() throws IOException {
-        for (int i = 0; i < players.size(); i++) {
-            players.get(i).setCopiedCardsInHand(players.get(i).getCardsInHand());
-            players.get(i).clearBoughtGoodAndResourceEffects();
+        for (Player player : players) {
+            player.setCopiedCardsInHand(player.getCardsInHand());
+            player.clearBoughtGoodAndResourceEffects();
         }
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getCardsInHand().size() > 1) {
-                players.get(i).nextTurn();
+        for (Player player : players) {
+            if (player.getCardsInHand().size() > 1) {
+                player.nextTurn();
             }
         }
         if (players.get(0).getCardsInHand().size() < 2) {
@@ -247,14 +247,15 @@ public class Board {
                 WonderEffect wonderEffect = (WonderEffect) effect;
                 if (wonderEffect.getEffectName().equals("UseLastCard")) {
                     UseLastCardDialog dialog = new UseLastCardDialog(player, player.getRightPlayer());
-                    boolean chosen = dialog.createDialog();
+                    //boolean chosen = dialog.createDialog();
+                    dialog.createDialog();
                     //while (!chosen) ;
                 }
             }
         }
     }
 
-    public void nextAge() {
+    private void nextAge() {
         for (Player player : players) {
             cardsInGrave.addAll(player.getCardsInHand());
             player.getPlayerPanel().remove(player.getPlayerPanel().getCardsPanel());
@@ -267,7 +268,7 @@ public class Board {
         age++;
 
         try {
-            deck=new Deck();
+            Deck deck = new Deck();
             if (age==2) {
                 deck.dealCards(deck.shuffle(deck.loadCards(FILEPATH_2)), players);
             }else if(age==3){
@@ -290,10 +291,10 @@ public class Board {
     }
 
     private void endGame() {
-        ScoreBoard scoreFrame;
-        for (Player player : players) {
-            scoreFrame=new ScoreBoard(players);
-        }
+       // ScoreBoard scoreFrame;
+        //for (Player player : players) {
+            new ScoreBoard(players);
+        //}
     }
 
     private void checkForBuildFromGraveEffect(ArrayList<Card> cardsInGrave) {
@@ -312,7 +313,7 @@ public class Board {
         //updateOpponentsPanel();
     }
 
-    public void resoveArmyEffects(ArrayList<Player> players) {
+    private void resoveArmyEffects(ArrayList<Player> players) {
 
         for (Player player : players) {
             int numOfshields = 0;

@@ -9,16 +9,13 @@ import player.Player;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by mkrec_000 on 22/03/2017.
- */
 public class LeftOponentPanel extends JPanel{
     private ResourcesPanel resourcesPanel;
-    BuildingsPanel buildingsPanel;
-    SciencePanel sciencePanel;
-    MainWonderPanel mainWonderPanel;
-    BuyPanel buyPanel;
-    public LeftOponentPanel(Player leftOpponent, Player player){
+    private BuildingsPanel buildingsPanel;
+    private SciencePanel sciencePanel;
+    private MainWonderPanel mainWonderPanel;
+    private BuyPanel buyPanel;
+    LeftOponentPanel(Player leftOpponent, Player player){
         this.setOpaque(false);
         this.setLayout(new GridBagLayout());
         this.setBorder(null);

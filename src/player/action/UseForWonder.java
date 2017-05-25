@@ -1,18 +1,16 @@
 package player.action;
 
 import cards.Card;
-import cards.Trade;
 import effects.*;
 import gui.playerPanel.WonderBuildPanel;
 import player.Player;
 import wonders.WonderStage;
-import wonders.Wonders;
 
 import java.util.ArrayList;
 
 public class UseForWonder implements Action{
     private Card card;
-    private Wonders wonder;
+   // private Wonders wonder;
 
     public UseForWonder(Card card) {
         this.card=card;
@@ -29,44 +27,59 @@ public class UseForWonder implements Action{
                 String effectType = effect.getEffectType();
                 switch (effectType) {
                     case "Culture":
-                        CultureEffect cultureEffect = (CultureEffect) effect;
-                        int wonderPoints = player.getBuiltWonderPoints();
-                        wonderPoints+=cultureEffect.getNumOfPoints();
-                        player.setBuiltWonderPoints(wonderPoints);
-                        wonderStage.setBuilt(true);
+                        addCultureEffect(player, wonderStage, (CultureEffect) effect);
                         break;
                     case "Army":
-                        ArmyEffect armyEffect = (ArmyEffect) effect;
-                        player.addEffect(effectType, armyEffect);
-                        wonderStage.setBuilt(true);
+                        addArmyEffect(player, wonderStage, (ArmyEffect) effect, effectType);
                         break;
                     case "Trade":
-                        TradeEffect tradeEffect = (TradeEffect) effect;
-                        player.addEffect(effectType, tradeEffect);
-                        wonderStage.setBuilt(true);
+                        addTradeEffect(player, wonderStage, (TradeEffect) effect, effectType);
 
                         break;
                     case "WonderEffect":
-                        WonderEffect wonderEffect = (WonderEffect) effect;
-                        player.addEffect(effectType, wonderEffect);
-                        wonderStage.setBuilt(true);
+                        addWonderEffect(player, wonderStage, (WonderEffect) effect, effectType);
 
                         break;
                     case "Money":
-                        MoneyEffect moneyEffect = (MoneyEffect) effect;
-                        int money = player.getMoney() + moneyEffect.getAmount();
-                        player.setMoney(money);
-                        player.getPlayerPanel().getWonderPanel().getBuildingsPanel().updateMoneyIcon(money);
-                        wonderStage.setBuilt(true);
+                        addMoney(player, wonderStage, (MoneyEffect) effect);
                         break;
                 }
 
                 player.getCardsInHand().remove(card);
             }
-            wonderBuildPanel.addBuiltLabel();
+            wonderBuildPanel.addBuiltLabel(wonderStage.getStage());
             ArrayList<WonderStage> wonderStages=player.getWonderStages();
             wonderStages.add(wonderStage);
             player.setWonderStages(wonderStages);
         }
+    }
+
+    private void addMoney(Player player, WonderStage wonderStage, MoneyEffect effect) {
+        int money = player.getMoney() + effect.getAmount();
+        player.setMoney(money);
+        player.getPlayerPanel().getWonderPanel().getBuildingsPanel().updateMoneyIcon(money);
+        wonderStage.setBuilt();
+    }
+
+    private void addCultureEffect(Player player, WonderStage wonderStage, CultureEffect effect) {
+        int wonderPoints = player.getBuiltWonderPoints();
+        wonderPoints+= effect.getNumOfPoints();
+        player.setBuiltWonderPoints(wonderPoints);
+        wonderStage.setBuilt();
+    }
+
+    private void addWonderEffect(Player player, WonderStage wonderStage, WonderEffect effect, String effectType) {
+        player.addEffect(effectType, effect);
+        wonderStage.setBuilt();
+    }
+
+    private void addTradeEffect(Player player, WonderStage wonderStage, TradeEffect effect, String effectType) {
+        player.addEffect(effectType, effect);
+        wonderStage.setBuilt();
+    }
+
+    private void addArmyEffect(Player player, WonderStage wonderStage, ArmyEffect effect, String effectType) {
+        player.addEffect(effectType, effect);
+        wonderStage.setBuilt();
     }
 }

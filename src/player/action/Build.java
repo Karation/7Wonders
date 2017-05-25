@@ -9,8 +9,8 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Build implements Action {
-    Card card;
-    boolean usedBuildForFreeEffect;
+    private Card card;
+    private boolean usedBuildForFreeEffect;
 
     public Build(Card card, boolean usedBuildForFreeEffect) {
         this.card = card;

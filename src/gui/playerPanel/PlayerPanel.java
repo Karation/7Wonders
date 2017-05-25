@@ -12,10 +12,10 @@ import java.util.ArrayList;
 
 
 public class PlayerPanel extends JPanel {
-    CardsPanel cardsPanel;
-    WonderPanel wonderPanel;
-    CanBuildPanel canBuildPanel;
-    ChatPanel chatPanel;
+    private CardsPanel cardsPanel;
+    private WonderPanel wonderPanel;
+    private CanBuildPanel canBuildPanel;
+    private ChatPanel chatPanel;
     public PlayerPanel(ArrayList<Card> cards, Player player, Wonders wonder) throws IOException{
         setLayout(new GridBagLayout());
         cardsPanel = new CardsPanel(cards, player);

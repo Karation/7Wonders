@@ -7,13 +7,11 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.DefaultComboBoxModel;
 
-public class BuyComboBox extends JComboBox{
-    ImageIcon[] images;
-    String[] effectStrings ;
-    DefaultComboBoxModel model;
-    public BuyComboBox(ArrayList<Effect> effects){
+class BuyComboBox extends JComboBox{
+    private DefaultComboBoxModel model;
+    BuyComboBox(ArrayList<Effect> effects){
 
-        effectStrings= new String[effects.size()];
+        String[] effectStrings = new String[effects.size()];
         for (int i = 0; i < effects.size(); i++) {
             if (effects.get(i) instanceof ResourceEffect)
                 effectStrings[i]=((ResourceEffect) effects.get(i)).getResourceType();
@@ -25,7 +23,7 @@ public class BuyComboBox extends JComboBox{
                 effectStrings[i]=((DoubleResourceEffect) effects.get(i)).getEffectName();
             }
         }
-        images = new ImageIcon[effectStrings.length];
+        ImageIcon[] images = new ImageIcon[effectStrings.length];
         for (int i = 0; i < effectStrings.length; i++) {
             images[i] = new ImageIcon("Icons\\" + effectStrings[i] + ".jpg");
         }
@@ -49,7 +47,7 @@ public class BuyComboBox extends JComboBox{
             }
         return model;
     }
-    public void removeElement(int index){
+    void removeElement(int index){
         model.removeElementAt(index);
         this.paintAll(this.getGraphics());
     }
@@ -86,33 +84,24 @@ class ImagesAndText{
     private String resourceName;
     private Effect resourceOrGoodEffect;
 
-    public ImagesAndText(ImageIcon icon, String resourceName, Effect resourceOrGoodEffect) {
+    ImagesAndText(ImageIcon icon, String resourceName, Effect resourceOrGoodEffect) {
         this.icon = icon;
         this.resourceName = resourceName;
         this.resourceOrGoodEffect=resourceOrGoodEffect;
     }
 
-    public Icon getIcon() {
+    Icon getIcon() {
         return icon;
     }
 
-    public void setIcon(ImageIcon icon) {
-        this.icon = icon;
-    }
 
-    public String getResourceName() {
+    String getResourceName() {
         return resourceName;
     }
 
-    public void setResourceName(String resourceName) {
-        this.resourceName = resourceName;
-    }
 
-    public Effect getResourceOrGoodEffect() {
+    Effect getResourceOrGoodEffect() {
         return resourceOrGoodEffect;
     }
 
-    public void setResourceOrGoodEffect(Effect resourceOrGoodEffect) {
-        this.resourceOrGoodEffect = resourceOrGoodEffect;
-    }
 }

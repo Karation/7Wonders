@@ -4,9 +4,7 @@ import effects.Effect;
 
 import java.awt.*;
 
-/**
- * Created by mkrec_000 on 27/04/2017.
- */
+
 public class Guild extends Card{
     private Effect guildEffect;
 
@@ -19,7 +17,4 @@ public class Guild extends Card{
         return guildEffect;
     }
 
-    public void setGuildEffect(Effect guildEffect) {
-        this.guildEffect = guildEffect;
-    }
 }

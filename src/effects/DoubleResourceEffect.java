@@ -1,13 +1,10 @@
 package effects;
 
-/**
- * Created by mkrec_000 on 19/04/2017.
- */
 public class DoubleResourceEffect extends Effect{
-    String effectName;
-    String resourceType;
-    int numberOfResources;
-    public DoubleResourceEffect(String effectType, String resourceType, int numberOfResources, String effectName) {
+    private String effectName;
+    private String resourceType;
+    private int numberOfResources;
+    DoubleResourceEffect(String effectType, String resourceType, int numberOfResources, String effectName) {
         super(effectType);
         this.resourceType = resourceType;
         this.numberOfResources=numberOfResources;
@@ -16,10 +13,6 @@ public class DoubleResourceEffect extends Effect{
 
     public String getResourceType() {
         return resourceType;
-    }
-
-    public void setResourceType(String resourceType) {
-        this.resourceType = resourceType;
     }
 
     public int getNumberOfResources() {
@@ -34,7 +27,4 @@ public class DoubleResourceEffect extends Effect{
         return effectName;
     }
 
-    public void setEffectName(String effectName) {
-        this.effectName = effectName;
-    }
 }

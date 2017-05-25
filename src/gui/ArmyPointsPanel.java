@@ -3,19 +3,17 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by mkrec_000 on 22/04/2017.
- */
+
 public class ArmyPointsPanel extends JPanel {
-    private GridBagConstraints c = new GridBagConstraints();
-    ArmyIconsPanel army0 = new ArmyIconsPanel();
-    ArmyIconsPanel army1 = new ArmyIconsPanel();
-    ArmyIconsPanel army3 = new ArmyIconsPanel();
-    ArmyIconsPanel army5 = new ArmyIconsPanel();
+    private ArmyIconsPanel army0 = new ArmyIconsPanel();
+    private ArmyIconsPanel army1 = new ArmyIconsPanel();
+    private ArmyIconsPanel army3 = new ArmyIconsPanel();
+    private ArmyIconsPanel army5 = new ArmyIconsPanel();
 
     public ArmyPointsPanel() {
         this.setOpaque(false);
         this.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
         c.anchor=GridBagConstraints.FIRST_LINE_END;
@@ -49,7 +47,7 @@ public class ArmyPointsPanel extends JPanel {
     }
 }
 class ArmyIconsPanel extends JPanel{
-    GridBagConstraints c = new GridBagConstraints();
+    private GridBagConstraints c = new GridBagConstraints();
     ArmyIconsPanel(){
         this.setOpaque(false);
         this.setBorder(null);

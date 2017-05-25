@@ -6,9 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-/**
- * Created by mkrec_000 on 01/05/2017.
- */
 public class ScoreBoard extends JFrame {
     private JPanel scorePanel;
     private JLabel player;

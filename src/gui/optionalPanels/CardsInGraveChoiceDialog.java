@@ -10,9 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-/**
- * Created by mkrec_000 on 07/04/2017.
- */
 public class CardsInGraveChoiceDialog extends JDialog{
     private ArrayList<Card> cardsInGrave = new ArrayList<>();
     private Player player;
@@ -34,13 +31,10 @@ public class CardsInGraveChoiceDialog extends JDialog{
             final int x = i;
             ImageIcon cardsImage = new ImageIcon(cardsInGrave.get(i).getImage());
             JButton button = new JButton(cardsImage);
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    player.setAction(new Build(cardsInGrave.get(x), false));
-                    player.startAction();
-                    CardsInGraveChoiceDialog.this.setVisible(false);
-                }
+            button.addActionListener(e -> {
+                player.setAction(new Build(cardsInGrave.get(x), false));
+                player.startAction();
+                CardsInGraveChoiceDialog.this.setVisible(false);
             });
             this.add(button);
         }

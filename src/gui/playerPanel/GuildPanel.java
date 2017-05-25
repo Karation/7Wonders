@@ -7,12 +7,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-/**
- * Created by mkrec_000 on 04/05/2017.
- */
 public class GuildPanel extends JPanel implements ShowCardOnIcon{
     private GridBagConstraints c = new GridBagConstraints();
-    public GuildPanel(){
+    GuildPanel(){
         this.setOpaque(false);
         this.setBorder(null);
         this.setLayout(new GridBagLayout());

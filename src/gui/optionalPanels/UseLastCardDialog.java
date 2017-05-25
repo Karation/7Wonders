@@ -1,7 +1,6 @@
 package gui.optionalPanels;
 
 import cards.Card;
-import gui.playerPanel.CardsPanel;
 import player.Player;
 import player.action.Build;
 import player.action.Sell;
@@ -10,19 +9,15 @@ import wonders.WonderStage;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- * Created by mkrec_000 on 11/04/2017.
- */
 public class UseLastCardDialog extends JDialog {
-    Player player;
-    Player opponent;
-    boolean chosen=false;
+    private Player player;
+    private Player opponent;
+    private boolean chosen=false;
     public UseLastCardDialog(Player player, Player opponent){
         this.player=player;
         this.opponent=opponent;
@@ -59,41 +54,38 @@ public class UseLastCardDialog extends JDialog {
         JButton useForWonderButton = new JButton("Use for Wonder");
         this.add(useForWonderButton);
 
-        ActionListener choiceListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == buildButton) {
-                    Set<Boolean> checkedIfCanBuildBuilding = new HashSet<>(player.checkIfCanBuild(card, null));
-                    if (checkedIfCanBuildBuilding.contains(false)){
-                        JOptionPane.showMessageDialog(UseLastCardDialog.this,
-                                "Cant Build, no required resources",
-                                "Building warning",
-                                JOptionPane.WARNING_MESSAGE);
-                    }else {
-                        player.setAction(new Build(card, false));
-                        player.startAction();
-                        UseLastCardDialog.this.setVisible(false);
-                        chosen=true;
-                    }
-                }else if(e.getSource()==sellButton){
-                    player.setAction(new Sell(0));
+        ActionListener choiceListener = e -> {
+            if (e.getSource() == buildButton) {
+                Set<Boolean> checkedIfCanBuildBuilding = new HashSet<>(player.checkIfCanBuild(card, null));
+                if (checkedIfCanBuildBuilding.contains(false)){
+                    JOptionPane.showMessageDialog(UseLastCardDialog.this,
+                            "Cant Build, no required resources",
+                            "Building warning",
+                            JOptionPane.WARNING_MESSAGE);
+                }else {
+                    player.setAction(new Build(card, false));
                     player.startAction();
                     UseLastCardDialog.this.setVisible(false);
-                    chosen = true;
-                }else if (e.getSource()==useForWonderButton){
-                    WonderStage wonderStageToBuild=player.getWonder().checkWhichWonderStageBuild();
-                    Set<Boolean> checkedIfCanBuildWonder = new HashSet<>(player.checkIfCanBuild(card, wonderStageToBuild));
-                    if(checkedIfCanBuildWonder.contains(false)){
-                        JOptionPane.showMessageDialog(UseLastCardDialog.this,
-                                "Cant Build, no required resources",
-                                "Building warning",
-                                JOptionPane.WARNING_MESSAGE);
-                    }else {
-                        player.setAction(new UseForWonder(card));
-                        player.startAction();
-                        UseLastCardDialog.this.setVisible(false);
-                        chosen=true;
-                    }
+                    chosen=true;
+                }
+            }else if(e.getSource()==sellButton){
+                player.setAction(new Sell(0));
+                player.startAction();
+                UseLastCardDialog.this.setVisible(false);
+                chosen = true;
+            }else if (e.getSource()==useForWonderButton){
+                WonderStage wonderStageToBuild=player.getWonder().checkWhichWonderStageBuild();
+                Set<Boolean> checkedIfCanBuildWonder = new HashSet<>(player.checkIfCanBuild(card, wonderStageToBuild));
+                if(checkedIfCanBuildWonder.contains(false)){
+                    JOptionPane.showMessageDialog(UseLastCardDialog.this,
+                            "Cant Build, no required resources",
+                            "Building warning",
+                            JOptionPane.WARNING_MESSAGE);
+                }else {
+                    player.setAction(new UseForWonder(card));
+                    player.startAction();
+                    UseLastCardDialog.this.setVisible(false);
+                    chosen=true;
                 }
             }
         };

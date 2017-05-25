@@ -1,12 +1,8 @@
 package cards;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by mkrec_000 on 22/02/2017.
- */
+
 public abstract class Card {
     private String name;
     private String price;

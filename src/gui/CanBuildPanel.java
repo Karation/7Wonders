@@ -3,17 +3,13 @@ package gui;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Created by mkrec_000 on 22/04/2017.
- */
 public class CanBuildPanel extends JPanel{
-    JList jList;
-    DefaultListModel<String> model;
-    JScrollPane pane;
+    private DefaultListModel<String> model;
+
     public CanBuildPanel() {
         model = new DefaultListModel<>();
-        pane=new JScrollPane();
-        jList=new JList(model);
+        JScrollPane pane = new JScrollPane();
+        JList jList = new JList(model);
 
         setOpaque(false);
 

@@ -1,20 +1,16 @@
 package effects;
 
-import cards.Good;
-import cards.Trade;
 import gui.oponentsPanel.LeftOponentPanel;
 import gui.oponentsPanel.RightOponentPanel;
 import player.Player;
 
 import javax.swing.*;
 
-/**
- * Created by mkrec_000 on 28/03/2017.
- */
-public class TradeEffect extends Effect {
-    String emblem;
 
-    public TradeEffect(String effectType, String emblem) {
+public class TradeEffect extends Effect {
+    private String emblem;
+
+    TradeEffect(String effectType, String emblem) {
         super(effectType);
         this.emblem = emblem;
     }

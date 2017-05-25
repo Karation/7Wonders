@@ -1,19 +1,15 @@
 package gui.oponentsPanel;
 
 import effects.*;
-import gui.oponentsPanel.BuyComboBox;
 import player.Player;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class BuyPanel extends JPanel{
-    JButton buyButton;
-    BuyComboBox buyComboBox;
-    ArrayList<Effect> effects;
+    private BuyComboBox buyComboBox;
+
     public BuyPanel(Player opponent, Player player, JPanel opponentPanel){
 
         this.setOpaque(false);
@@ -21,57 +17,53 @@ public class BuyPanel extends JPanel{
         GridBagConstraints c = new GridBagConstraints();
 
 
-        buyButton=new JButton();
+        JButton buyButton = new JButton();
         buyButton.setText("BUY");
         buyButton.setPreferredSize(new Dimension(100, 40));
 
-        //this.setBorder(null);
-        buyButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                ImagesAndText imagesAndText = (ImagesAndText) buyComboBox.getSelectedItem();
+        buyButton.addActionListener(e -> {
+            ImagesAndText imagesAndText = (ImagesAndText) buyComboBox.getSelectedItem();
 
-                if(imagesAndText!=null) {
-                    int moneyToPay=2;
-                    int playerMoney=player.getMoney();
-                    ImagesAndText selectedElement= (ImagesAndText) buyComboBox.getSelectedItem();
-                    Effect resourceOrGoodEffect=selectedElement.getResourceOrGoodEffect();
-                    moneyToPay=checkForTradeEffects(player, moneyToPay, resourceOrGoodEffect, opponentPanel);
-                    if (moneyToPay>playerMoney){
-                        JOptionPane.showMessageDialog(BuyPanel.this,
-                                "Not enough money",
-                                "Buying Warning",
-                                JOptionPane.WARNING_MESSAGE);
-                    }else {
-                        if (resourceOrGoodEffect instanceof DoubleResourceEffect){
-                            DoubleResourceEffect doubleResourceEffect = (DoubleResourceEffect) resourceOrGoodEffect;
-                            if (doubleResourceEffect.getNumberOfResources() == 2){
-                                doubleResourceEffect.setNumberOfResources(1);
-                            }else{
-                                buyComboBox.removeElement(buyComboBox.getSelectedIndex());
-                            }
+            if(imagesAndText!=null) {
+                int moneyToPay=2;
+                int playerMoney=player.getMoney();
+                ImagesAndText selectedElement= (ImagesAndText) buyComboBox.getSelectedItem();
+                Effect resourceOrGoodEffect=selectedElement.getResourceOrGoodEffect();
+                moneyToPay=checkForTradeEffects(player, moneyToPay, resourceOrGoodEffect, opponentPanel);
+                if (moneyToPay>playerMoney){
+                    JOptionPane.showMessageDialog(BuyPanel.this,
+                            "Not enough money",
+                            "Buying Warning",
+                            JOptionPane.WARNING_MESSAGE);
+                }else {
+                    if (resourceOrGoodEffect instanceof DoubleResourceEffect){
+                        DoubleResourceEffect doubleResourceEffect = (DoubleResourceEffect) resourceOrGoodEffect;
+                        if (doubleResourceEffect.getNumberOfResources() == 2){
+                            doubleResourceEffect.setNumberOfResources(1);
                         }else{
                             buyComboBox.removeElement(buyComboBox.getSelectedIndex());
                         }
-                        updatePlayer(player, playerMoney, moneyToPay, resourceOrGoodEffect);
-                        opponent.payOpponentForBoughtItem(moneyToPay);
-
+                    }else{
+                        buyComboBox.removeElement(buyComboBox.getSelectedIndex());
                     }
-                    System.out.println(player.getMoney());
+                    updatePlayer(player, playerMoney, moneyToPay, resourceOrGoodEffect);
+                    opponent.payOpponentForBoughtItem(moneyToPay);
 
                 }
-                else{
-                    JOptionPane.showMessageDialog(BuyPanel.this,
-                            "Cant buy any other resources or goods",
-                            "Buying Warning",
-                            JOptionPane.WARNING_MESSAGE);
-                }
+                System.out.println(player.getMoney());
+
+            }
+            else{
+                JOptionPane.showMessageDialog(BuyPanel.this,
+                        "Cant buy any other resources or goods",
+                        "Buying Warning",
+                        JOptionPane.WARNING_MESSAGE);
             }
         });
 
         ArrayList<Effect> resourceEffects = new ArrayList<>(opponent.getResourceEffects());
         ArrayList<Effect> goodEffects = new ArrayList<>(opponent.getGoodEffects());
-        effects= new ArrayList<>(resourceEffects);
+        ArrayList<Effect> effects = new ArrayList<>(resourceEffects);
         effects.addAll(goodEffects);
 
 
@@ -87,18 +79,18 @@ public class BuyPanel extends JPanel{
         this.paintAll(this.getGraphics());
 
     }
-    public int checkForTradeEffects(Player player, int moneyToPay, Effect resourceOrGoodEffect, JPanel opponentPanel){
+    private int checkForTradeEffects(Player player, int moneyToPay, Effect resourceOrGoodEffect, JPanel opponentPanel){
         ArrayList<Effect> tradeEffects = player.getTradeEffects();
-        for (int i = 0; i < tradeEffects.size(); i++) {
-            TradeEffect tradeEffect=(TradeEffect) tradeEffects.get(i);
-            moneyToPay=tradeEffect.resolveTradeEffect(tradeEffect, resourceOrGoodEffect, opponentPanel);
-            if(moneyToPay==1){
+        for (Effect tradeEffect1 : tradeEffects) {
+            TradeEffect tradeEffect = (TradeEffect) tradeEffect1;
+            moneyToPay = tradeEffect.resolveTradeEffect(tradeEffect, resourceOrGoodEffect, opponentPanel);
+            if (moneyToPay == 1) {
                 return moneyToPay;
             }
         }
         return moneyToPay;
     }
-    public void updatePlayer(Player player, int playerMoney, int moneyToPay, Effect resourceOrGoodEffect){
+    private void updatePlayer(Player player, int playerMoney, int moneyToPay, Effect resourceOrGoodEffect){
         ArrayList<Effect> boughtResourceEffects=player.getBoughtResourceEffects();
         ArrayList<Effect> boughtGoodEffects=player.getBoughtGoodEffects();
         playerMoney -= moneyToPay;
