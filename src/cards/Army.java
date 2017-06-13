@@ -23,9 +23,4 @@ public class Army extends Card{
         return canBuild;
     }
 
-    public void setCanBuild(String canBuild) {
-        this.canBuild = canBuild;
-    }
-
-
 }

@@ -1,4 +1,4 @@
-package gui.playerPanel;
+package gui.playerPanel.wonderPanel.sidePanels;
 
 import cards.Army;
 import cards.Card;

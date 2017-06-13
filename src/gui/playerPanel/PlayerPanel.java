@@ -1,7 +1,8 @@
 package gui.playerPanel;
 
 import cards.Card;
-import gui.CanBuildPanel;
+import gui.playerPanel.cardsPanel.CardsPanel;
+import gui.playerPanel.wonderPanel.WonderPanel;
 import player.Player;
 import wonders.Wonders;
 
@@ -46,7 +47,7 @@ public class PlayerPanel extends JPanel {
         this.add(cardsPanel, c);
         this.setOpaque(false);
 
-        chatPanel = new ChatPanel(player.getBoard().getPlayers());
+        chatPanel = new ChatPanel(player, player.getBoard().getChatSession());
         c.gridx=2;
         c.gridy=0;
         c.gridheight=2;

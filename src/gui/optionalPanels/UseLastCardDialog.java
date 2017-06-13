@@ -35,8 +35,8 @@ public class UseLastCardDialog extends JDialog {
         c.gridx=0;
         ImageIcon cardIcon = new ImageIcon(card.getImage());
         JPanel cardPanel = new JPanel(new FlowLayout());
-        JButton iconbutton = new JButton(cardIcon);
-        cardPanel.add(iconbutton);
+        JButton iconButton = new JButton(cardIcon);
+        cardPanel.add(iconButton);
         this.add(cardPanel, c);
 
         c.gridx=0;

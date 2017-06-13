@@ -2,11 +2,17 @@ package player.action;
 
 import cards.*;
 import effects.*;
-import gui.playerPanel.*;
+import gui.playerPanel.wonderPanel.*;
+import gui.playerPanel.wonderPanel.sidePanels.BuildingsPanel;
+import gui.playerPanel.wonderPanel.sidePanels.ResourcesPanel;
+import gui.playerPanel.wonderPanel.sidePanels.SciencePanel;
+import gui.playerPanel.wonderPanel.sidePanels.insidePanels.GuildPanel;
+import gui.playerPanel.wonderPanel.sidePanels.insidePanels.TradePanel;
 import player.Player;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Build implements Action {
     private Card card;
@@ -79,7 +85,7 @@ public class Build implements Action {
 
                 player.addEffect(type, armyEffect);
 
-                if (army.getCanBuild() != null) {
+                if (!Objects.equals(army.getCanBuild(), "null")) {
                     player.getCanBuildArray().add(army.getCanBuild());
                     player.getPlayerPanel().getCanBuildPanel().addToList(army.getCanBuild());
                 }
@@ -145,7 +151,7 @@ public class Build implements Action {
         }
 
         if (usedBuildForFreeEffect) {
-            player.setUsedBuildForFreeEffect(true);
+            player.setUsedBuildForFreeEffect();
         }
     }
 }

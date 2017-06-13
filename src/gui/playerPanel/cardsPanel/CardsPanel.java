@@ -1,9 +1,8 @@
-package gui.playerPanel;
+package gui.playerPanel.cardsPanel;
 
 import cards.Card;
 import effects.Effect;
 import effects.WonderEffect;
-import gui.AcceptButton;
 import player.*;
 import player.action.Build;
 import player.action.Sell;
@@ -15,7 +14,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +22,7 @@ public class CardsPanel extends JPanel {
     private boolean didChoose = false;
     private JComboBox options;
     private AcceptButton acceptButton;
+
 
     public CardsPanel(ArrayList<Card> cards, Player player) throws IOException {
         this.setOpaque(false);
@@ -95,7 +94,7 @@ public class CardsPanel extends JPanel {
             cardPanel.setOpaque(false);
         }
 
-        acceptButton = new AcceptButton(player);
+        acceptButton = new AcceptButton(player, this);
         this.add(acceptButton, c);
         this.paintAll(this.getGraphics());
 
@@ -170,4 +169,11 @@ public class CardsPanel extends JPanel {
         didChoose=true;
         acceptButton.setEnabled(true);
     }
+    public void disableCardPanel(){
+        for (Component o : this.getComponents()) {
+            o.setVisible(false);
+        }
+    }
+
+
 }

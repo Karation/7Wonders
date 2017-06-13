@@ -5,6 +5,7 @@ import cards.*;
 import effects.*;
 import gui.oponentsPanel.OpponentPanel;
 import gui.playerPanel.*;
+import gui.playerPanel.cardsPanel.CardsPanel;
 import wonders.WonderStage;
 import wonders.Wonders;
 
@@ -16,7 +17,15 @@ import java.util.ArrayList;
 public class Player {
     public final static int MAX_CARDS_IN_HAND = 7;
     private final static int STARTING_MONEY = 3;
-    private String name="panRolnik";
+
+    private int money = STARTING_MONEY;
+    private int moneyToBeTransfered = 0;
+    private int numOfShields = 0;
+    private int armyPositivePoints = 0;
+    private int armyNegativePoints = 0;
+    private int builtWonderPoints = 0;
+    private boolean usedBuildForFreeEffect = false;
+
     private ArrayList<Card> cardsInHand = new ArrayList<>();
     private ArrayList<Card> copiedCardsInHand = new ArrayList<>();
     private ArrayList<Effect> copiedResourceEffects = new ArrayList<>();
@@ -25,13 +34,6 @@ public class Player {
     private ArrayList<Effect> copiedBoughtGoodEffects = new ArrayList<>();
     private ArrayList<Effect> copiedTradeEffects = new ArrayList<>();
 
-    private Wonders wonder;
-    private int money = STARTING_MONEY;
-    private int moneyToBeTransfered = 0;
-    private int numOfShields = 0;
-    private int armyPositivePoints = 0;
-    private int armyNegativePoints = 0;
-    private int builtWonderPoints = 0;
     private ArrayList<ArrayList<Effect>> effects = addToEffectArray();
     private ArrayList<Effect> resourceEffects = new ArrayList<>();
     private ArrayList<Effect> cultureEffects = new ArrayList<>();
@@ -46,21 +48,22 @@ public class Player {
     private ArrayList<Effect> guildEffects = new ArrayList<>();
     private ArrayList<WonderStage> wonderStages = new ArrayList<>();
     private ArrayList<Float> overallPoints;
-    private Card cardToBeRemoved;
 
-    private PlayerPanel playerPanel;
+    private Card cardToBeRemoved;
+    private Wonders wonder;
     private Player leftPlayer;
     private Player rightPlayer;
-    private JLabel backgroundPanel;
     private player.action.Action action;
     private Board board;
     private GridBagConstraints constraints;
+    private PlayerPanel playerPanel;
     private OpponentPanel opponentPanel;
+    private JLabel backgroundPanel;
+    private String name;
 
-    private boolean usedBuildForFreeEffect = false;
 
-
-    public Player() {
+    public Player(String username) {
+        name = username;
     }
 
     public PlayerPanel start(JLabel backgroundPanel, GridBagConstraints constraints, ArrayList<Card> cards, Wonders wonder) throws IOException {
@@ -77,18 +80,19 @@ public class Player {
         Player rightPlayer = this.getRightPlayer();
         this.setCardsInHand(rightPlayer.getCopiedCardsInHand());
         cardsPanel = new CardsPanel(cardsInHand, this);
-        constraints.gridx=1;
+        constraints.gridx = 1;
         constraints.gridy = 1;
         playerPanel.setCardsPanel(cardsPanel);
         playerPanel.add(cardsPanel, constraints);
         backgroundPanel.paintAll(backgroundPanel.getGraphics());
 
     }
-    public void nextAge() throws IOException{
+
+    public void nextAge() throws IOException {
         CardsPanel cardsPanel;
         playerPanel.remove(playerPanel.getCardsPanel());
         cardsPanel = new CardsPanel(this.getCardsInHand(), this);
-        constraints.gridx=1;
+        constraints.gridx = 1;
         constraints.gridy = 1;
         playerPanel.setCardsPanel(cardsPanel);
         playerPanel.add(cardsPanel, constraints);
@@ -143,7 +147,6 @@ public class Player {
         }
     }
 
-
     public void startAction() {
         action.executeAction(this);
     }
@@ -152,15 +155,13 @@ public class Player {
     public void clearBoughtGoodAndResourceEffects() {
         boughtResourceEffects.clear();
         boughtGoodEffects.clear();
-
     }
 
     private void clearAllCopiedEffectArrays() {
-        copiedBoughtResourceEffects=new ArrayList<>();
-        copiedBoughtGoodEffects=new ArrayList<>();
-        copiedGoodEffects=new ArrayList<>();
-        copiedResourceEffects=new ArrayList<>();
-
+        copiedBoughtResourceEffects = new ArrayList<>();
+        copiedBoughtGoodEffects = new ArrayList<>();
+        copiedGoodEffects = new ArrayList<>();
+        copiedResourceEffects = new ArrayList<>();
         copiedTradeEffects = new ArrayList<>();
     }
 
@@ -197,10 +198,10 @@ public class Player {
     }
 
     private void refreshGoodsResourcesAndTradeEffects() {
-        resourceEffects=new ArrayList<>();
-        goodEffects=new ArrayList<>();
-        boughtGoodEffects=new ArrayList<>();
-        boughtResourceEffects=new ArrayList<>();
+        resourceEffects = new ArrayList<>();
+        goodEffects = new ArrayList<>();
+        boughtGoodEffects = new ArrayList<>();
+        boughtResourceEffects = new ArrayList<>();
         tradeEffects = new ArrayList<>();
         resourceEffects.addAll(copiedResourceEffects);
         goodEffects.addAll(copiedGoodEffects);
@@ -266,13 +267,13 @@ public class Player {
                     return true;
                 }
                 //dodane
-            }else if(resourceEffects.get(i) instanceof DoubleResourceEffect){
+            } else if (resourceEffects.get(i) instanceof DoubleResourceEffect) {
                 DoubleResourceEffect doubleResource = (DoubleResourceEffect) resourceEffects.get(i);
-                if (doubleResource.getResourceType().equals(effect)){
-                    if(doubleResource.getNumberOfResources()==2){
+                if (doubleResource.getResourceType().equals(effect)) {
+                    if (doubleResource.getNumberOfResources() == 2) {
                         doubleResource.setNumberOfResources(1);
                         return true;
-                    }else{
+                    } else {
                         resourceEffects.remove(i);
                         return true;
                     }
@@ -292,14 +293,13 @@ public class Player {
                     boughtResourceEffects.remove(i);
                     return true;
                 }
-            } else if (boughtResourceEffects.get(i) instanceof DoubleResourceEffect){
+            } else if (boughtResourceEffects.get(i) instanceof DoubleResourceEffect) {
                 DoubleResourceEffect doubleResourceEffect = (DoubleResourceEffect) boughtResourceEffects.get(i);
-                if (doubleResourceEffect.getResourceType().equals(effect)){
+                if (doubleResourceEffect.getResourceType().equals(effect)) {
                     boughtResourceEffects.remove(i);
                     return true;
                 }
-            }
-            else if (boughtResourceEffects.get(i) instanceof MixedResourceEffect) {
+            } else if (boughtResourceEffects.get(i) instanceof MixedResourceEffect) {
                 MixedResourceEffect mixedResource = (MixedResourceEffect) boughtResourceEffects.get(i);
                 if (mixedResource.getResourceType1().equals(effect) || mixedResource.getResourceType2().equals(effect)) {
                     boughtResourceEffects.remove(i);
@@ -309,7 +309,7 @@ public class Player {
         }
         for (int i = 0; i < tradeEffects.size(); i++) {
             TradeEffect tradeEffect = (TradeEffect) tradeEffects.get(i);
-            if (tradeEffect.getEmblem().equals("ResourceProduction")){
+            if (tradeEffect.getEmblem().equals("ResourceProduction")) {
                 tradeEffects.remove(tradeEffect);
                 return true;
             }
@@ -335,17 +335,18 @@ public class Player {
         }
         for (int i = 0; i < tradeEffects.size(); i++) {
             TradeEffect good = (TradeEffect) tradeEffects.get(i);
-            if (good.getEmblem().equals("GoodProduction")){
+            if (good.getEmblem().equals("GoodProduction")) {
                 tradeEffects.remove(i);
                 return true;
             }
         }
         return false;
     }
+
     public void calculatePoints() {
-        overallPoints= new ArrayList<>();
-        float armyPoints=this.getPositiveArmyPoints()-this.getNegativeArmyPoints();
-        float moneyPoints=(this.getMoney()/3);
+        overallPoints = new ArrayList<>();
+        float armyPoints = this.getPositiveArmyPoints() - this.getNegativeArmyPoints();
+        float moneyPoints = (this.getMoney() / 3);
         float wonderPoints = this.getBuiltWonderPoints();
         float culturePoints = resolveCulturePoints();
         float tradePoints = resolveTradePoints();
@@ -363,36 +364,39 @@ public class Player {
     }
 
     private float resolveGuildPoints() {
-        float guildPoints=0;
+        float guildPoints = 0;
         for (Effect guildEffect : guildEffects) {
             GuildEffect guildEffect1 = (GuildEffect) guildEffect;
-            guildPoints +=guildEffect1.resolveGuildEffect(this );
+            guildPoints += guildEffect1.resolveGuildEffect(this);
         }
         return guildPoints;
     }
-    private float resolveCulturePoints(){
-        float culturePoints=0;
+
+    private float resolveCulturePoints() {
+        float culturePoints = 0;
         for (Effect cultureEffect : cultureEffects) {
             CultureEffect cultureEffect1 = (CultureEffect) cultureEffect;
             culturePoints += cultureEffect1.getNumOfPoints();
         }
         return culturePoints;
     }
-    private float resolveTradePoints(){
-        float tradePoints=0;
+
+    private float resolveTradePoints() {
+        float tradePoints = 0;
         for (Effect tradeEffect : tradeEffects) {
             TradeEffect tradeEffect1 = (TradeEffect) tradeEffect;
             tradePoints += tradeEffect1.resolveTradePointsEffect(this, tradeEffect1.getEmblem());
         }
         return tradePoints;
     }
-    private float resolveSciencePoints(){
-        int math =0;
-        int scripture=0;
-        int mechanics=0;
+
+    private float resolveSciencePoints() {
+        int math = 0;
+        int scripture = 0;
+        int mechanics = 0;
         for (Effect scienceEffect : scienceEffects) {
             ScienceEffect scienceEffect1 = (ScienceEffect) scienceEffect;
-            switch (scienceEffect1.getScienceSymbol()){
+            switch (scienceEffect1.getScienceSymbol()) {
                 case "Math":
                     math++;
                     break;
@@ -405,14 +409,14 @@ public class Player {
             }
         }
         int smallest = findSmallestNumber(new int[]{math, scripture, mechanics});
-        return (((math^2)+(scripture^2)+(mechanics^2))+(7*smallest));
+        return (((math ^ 2) + (scripture ^ 2) + (mechanics ^ 2)) + (7 * smallest));
     }
 
     private int findSmallestNumber(int[] ints) {
         int smallest = ints[0];
         for (int i = 1; i < ints.length; i++) {
-            if (ints[i]<smallest){
-                smallest=ints[i];
+            if (ints[i] < smallest) {
+                smallest = ints[i];
             }
         }
         return smallest;
@@ -595,8 +599,8 @@ public class Player {
         return usedBuildForFreeEffect;
     }
 
-    public void setUsedBuildForFreeEffect(boolean usedBuildForFreeEffect) {
-        this.usedBuildForFreeEffect = usedBuildForFreeEffect;
+    public void setUsedBuildForFreeEffect() {
+        this.usedBuildForFreeEffect = true;
     }
 
     public ArrayList<String> getCanBuildArray() {

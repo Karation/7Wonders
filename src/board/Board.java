@@ -1,19 +1,23 @@
 package board;
 
 import cards.*;
+import chat.ChatSession;
 import effects.*;
 import gui.ScoreBoard;
 import gui.oponentsPanel.*;
 import gui.optionalPanels.CardsInGraveChoiceDialog;
 import gui.optionalPanels.UseLastCardDialog;
-import gui.playerPanel.BuildingsPanel;
-import gui.playerPanel.ResourcesPanel;
-import gui.playerPanel.SciencePanel;
-import gui.playerPanel.TradePanel;
+import gui.playerPanel.wonderPanel.sidePanels.ArmyPointsPanel;
+import gui.playerPanel.wonderPanel.sidePanels.BuildingsPanel;
+import gui.playerPanel.wonderPanel.sidePanels.ResourcesPanel;
+import gui.playerPanel.wonderPanel.sidePanels.SciencePanel;
+import gui.playerPanel.wonderPanel.sidePanels.insidePanels.TradePanel;
+import gui.playerPanel.wonderPanel.sidePanels.insidePanels.WonderBuildPanel;
 import player.Player;
 import player.action.Action;
 import player.action.Build;
 import player.action.Sell;
+import player.action.UseForWonder;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,19 +31,17 @@ public class Board {
     private ArrayList<Player> players;
     private List<Boolean> choices;
     private ArrayList<Card> cardsInGrave = new ArrayList<>();
+    private ChatSession chatSession;
     private int age = 1;
-    private final static String FILEPATH_2 ="cards2.txt";
-    private final static String FILEPATH_3 ="cards3.txt";
-    private final static String GUILDS ="guilds.txt";
+    private final static String FILEPATH_2 = "cards2.txt";
+    private final static String FILEPATH_3 = "cards3.txt";
+    private final static String GUILDS = "guilds.txt";
 
     public Board(ArrayList<Player> players) {
         this.players = players;
         choices = new ArrayList<>(players.size());
+        chatSession = new ChatSession();
     }
-
-//    public Player getPlayer(int i) {
-//        return players.get(i);
-//    }
 
     public void addToChoicesArray(Boolean choice) {
         choices.add(choice);
@@ -98,6 +100,9 @@ public class Board {
             SciencePanel leftSciencePanel = leftOponentPanel.getSciencePanel();
             SciencePanel rightSciencePanel = rightOponentPanel.getSciencePanel();
 
+            WonderBuildPanel leftWonderBuildPanel = leftOponentPanel.getMainWonderPanel().getWonderBuildPanel();
+            WonderBuildPanel rightWonderBuildPanel = rightOponentPanel.getMainWonderPanel().getWonderBuildPanel();
+
             Action leftPlayerAction = leftPlayer.getAction();
             Action rightPlayerAction = rightPlayer.getAction();
 
@@ -105,13 +110,18 @@ public class Board {
                 addIconToOpponentPanel(player, leftPlayerCard, leftOpponentBuildingPanel, leftOpponentResourcePanel, leftTradePanel, leftSciencePanel);
             } else if (leftPlayerAction instanceof Sell) {
                 addMoneyToOpponentPanelFromSell(leftPlayer, leftOpponentBuildingPanel);
+            } else if (leftPlayerAction instanceof UseForWonder) {
+                setWonderAsBuilt(leftPlayer, leftWonderBuildPanel);
             }
 
             if (rightPlayerAction instanceof Build) {
                 addIconToOpponentPanel(player, rightPlayerCard, rightOpponentBuildingPanel, rightOpponentResourcePanel, rightTradePanel, rightSciencePanel);
             } else if (rightPlayerAction instanceof Sell) {
                 addMoneyToOpponentPanelFromSell(rightPlayer, rightOpponentBuildingPanel);
+            } else if (rightPlayerAction instanceof UseForWonder) {
+                setWonderAsBuilt(rightPlayer, rightWonderBuildPanel);
             }
+
             addMoneyToOpponentPanel(leftPlayer, leftOpponentBuildingPanel);
             addMoneyToOpponentPanel(rightPlayer, rightOpponentBuildingPanel);
             updateBuyPanel(leftPlayer, rightPlayer, player, leftOponentPanel, rightOponentPanel);
@@ -128,13 +138,13 @@ public class Board {
         leftOponentPanel.remove(leftOponentPanel.getBuyPanel());
         rightOponentPanel.remove(rightOponentPanel.getBuyPanel());
 
-        c.gridx=2;
-        c.gridy=0;
-        c.anchor=GridBagConstraints.FIRST_LINE_START;
+        c.gridx = 2;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
         leftOponentPanel.add(leftBuyPanel, c);
-        c.gridx=0;
-        c.gridy=0;
-        c.anchor=GridBagConstraints.FIRST_LINE_START;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
         rightOponentPanel.add(rightBuyPanel, c);
         leftOponentPanel.setBuyPanel(leftBuyPanel);
         rightOponentPanel.setBuyPanel(rightBuyPanel);
@@ -154,7 +164,7 @@ public class Board {
                     MixedResourceEffect mixedResourceEffect = (MixedResourceEffect) resource.getResourceEffect();
                     resourceName = mixedResourceEffect.getEffectName();
                     opponentsBuildingPanel.substractMoney(1);
-                } else if(resource.getResourceEffect() instanceof DoubleResourceEffect){
+                } else if (resource.getResourceEffect() instanceof DoubleResourceEffect) {
                     DoubleResourceEffect doubleResourceEffect = (DoubleResourceEffect) resource.getResourceEffect();
                     resourceName = doubleResourceEffect.getEffectName();
                     opponentsBuildingPanel.substractMoney(1);
@@ -201,6 +211,11 @@ public class Board {
         }
     }
 
+    private void setWonderAsBuilt(Player opponent, WonderBuildPanel wonderBuildPanel) {
+        //-1 cus the stage has already changed for next one to build.
+        wonderBuildPanel.addBuiltLabel(opponent.getWonderStages().size());
+    }
+
     private void addMoneyToOpponentPanel(Player opponent, BuildingsPanel buildingsPanel) {
         int money = opponent.getMoney();
         buildingsPanel.updateMoneyIcon(money);
@@ -218,8 +233,7 @@ public class Board {
         int money = player.getMoney();
         money += moneyForBoughtItems;
         player.setMoney(money);
-        money = 0;
-        player.setMoneyToBeTransfered(money);
+        player.setMoneyToBeTransfered(0);
         player.getPlayerPanel().getWonderPanel().getBuildingsPanel().updateMoneyIcon(money);
     }
 
@@ -247,9 +261,7 @@ public class Board {
                 WonderEffect wonderEffect = (WonderEffect) effect;
                 if (wonderEffect.getEffectName().equals("UseLastCard")) {
                     UseLastCardDialog dialog = new UseLastCardDialog(player, player.getRightPlayer());
-                    //boolean chosen = dialog.createDialog();
                     dialog.createDialog();
-                    //while (!chosen) ;
                 }
             }
         }
@@ -269,13 +281,13 @@ public class Board {
 
         try {
             Deck deck = new Deck();
-            if (age==2) {
+            if (age == 2) {
                 deck.dealCards(deck.shuffle(deck.loadCards(FILEPATH_2)), players);
-            }else if(age==3){
+            } else if (age == 3) {
                 ArrayList<Card> cardsAge3 = deck.loadCards(FILEPATH_3);
                 ArrayList<Card> guilds = deck.loadCards(GUILDS);
                 deck.dealCards(deck.addGuildsToDeck(guilds, cardsAge3, players.size()), players);
-            }else if(age==4){
+            } else if (age == 4) {
                 endGame();
             }
         } catch (IOException e) {
@@ -291,10 +303,7 @@ public class Board {
     }
 
     private void endGame() {
-       // ScoreBoard scoreFrame;
-        //for (Player player : players) {
-            new ScoreBoard(players);
-        //}
+        new ScoreBoard(players);
     }
 
     private void checkForBuildFromGraveEffect(ArrayList<Card> cardsInGrave) {
@@ -310,11 +319,11 @@ public class Board {
                 }
             }
         }
-        //updateOpponentsPanel();
     }
 
     private void resoveArmyEffects(ArrayList<Player> players) {
-
+        Player leftPlayer;
+        Player rightPlayer;
         for (Player player : players) {
             int numOfshields = 0;
             ArrayList<Effect> effects = player.getArmyEffects();
@@ -325,10 +334,22 @@ public class Board {
             player.setNumOfShields(numOfshields);
         }
         for (Player player : players) {
-            Player leftPlayer = player.getLeftPlayer();
-            Player rightPlayer = player.getRightPlayer();
+            leftPlayer = player.getLeftPlayer();
+            rightPlayer = player.getRightPlayer();
             resolveArmyPoints(player, leftPlayer);
             resolveArmyPoints(player, rightPlayer);
+        }
+        for (Player player : players){
+            leftPlayer = player.getLeftPlayer();
+            rightPlayer = player.getRightPlayer();
+
+            ArmyPointsLabels leftOpponentArmyPointsPanel = player.getOpponentPanel().getLeftOponentPanel().getArmyPointsLabels();
+            ArmyPointsLabels rightOpponentArmyPointsPanel = player.getOpponentPanel().getRightOponentPanel().getArmyPointsLabels();
+            addArmyIconsToOpponentPanel(leftPlayer, leftOpponentArmyPointsPanel, player);
+            addArmyIconsToOpponentPanel(rightPlayer, rightOpponentArmyPointsPanel, player);
+
+            addArmyIconsToOpponentPanel(leftPlayer, leftOpponentArmyPointsPanel, rightPlayer);
+            addArmyIconsToOpponentPanel(rightPlayer, rightOpponentArmyPointsPanel, leftPlayer);
         }
     }
 
@@ -358,6 +379,23 @@ public class Board {
             player.getPlayerPanel().getWonderPanel().getArmyPointsPanel().addArmyIcon("Army-1");
         }
     }
+    private void addArmyIconsToOpponentPanel(Player opponent, ArmyPointsLabels opponentArmyPointsLabels, Player player){
+        if (opponent.getNumOfShields()>player.getNumOfShields()){
+            switch (age){
+                case 1:
+                    opponentArmyPointsLabels.addPositivepoints(1);
+                    break;
+                case 2:
+                    opponentArmyPointsLabels.addPositivepoints(3);
+                    break;
+                case 3:
+                    opponentArmyPointsLabels.addPositivepoints(5);
+                    break;
+            }
+        } else {
+            opponentArmyPointsLabels.addNegativePoints();
+        }
+    }
 
     public ArrayList<Card> getCardsInGrave() {
         return cardsInGrave;
@@ -365,5 +403,9 @@ public class Board {
 
     public ArrayList<Player> getPlayers() {
         return players;
+    }
+
+    public ChatSession getChatSession() {
+        return chatSession;
     }
 }

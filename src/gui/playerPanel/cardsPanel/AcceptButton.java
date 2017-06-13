@@ -1,20 +1,16 @@
-package gui;
+package gui.playerPanel.cardsPanel;
 
 import board.Board;
-import gui.playerPanel.CardsPanel;
 import player.Player;
 
 import javax.swing.*;
-import javax.swing.undo.AbstractUndoableEdit;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class AcceptButton extends JToggleButton{
     private Boolean choice;
-    //JPanel glassPane = new JPanel();
-    public AcceptButton(Player player){
+    public AcceptButton(Player player, CardsPanel cardsPanel){
         this.setText("Accept");
         this.setEnabled(false);
         this.addActionListener(new ActionListener() {
@@ -27,6 +23,7 @@ public class AcceptButton extends JToggleButton{
                     Board board = player.getBoard();
                     board.addToChoicesArray(choice);
                     boolean didResolve = board.resolveActions();
+                    cardsPanel.disableCardPanel();
                     if (didResolve) {
                         try {
                             board.nextTurn();
@@ -36,6 +33,8 @@ public class AcceptButton extends JToggleButton{
                             board.clearChoicesArray();
                         }
                     }
+
+
                 }
                 choice=false;
             }

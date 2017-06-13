@@ -1,9 +1,6 @@
 package gui.oponentsPanel;
 
-import gui.playerPanel.BuildingsPanel;
-import gui.playerPanel.MainWonderPanel;
-import gui.playerPanel.ResourcesPanel;
-import gui.playerPanel.SciencePanel;
+import gui.playerPanel.wonderPanel.sidePanels.*;
 import player.Player;
 
 import javax.swing.*;
@@ -16,6 +13,7 @@ public class RightOponentPanel extends JPanel{
     private MainWonderPanel mainWonderPanel;
     private SciencePanel sciencePanel;
     private BuyPanel buyPanel;
+    private ArmyPointsLabels armyPointsPanel;
 
     RightOponentPanel(Player rightOpponent, Player player){
         this.setOpaque(false);
@@ -60,6 +58,13 @@ public class RightOponentPanel extends JPanel{
         c.anchor = GridBagConstraints.LINE_START;
         resourcesPanel = new ResourcesPanel();
         this.add(resourcesPanel, c);
+
+        c.gridy=2;
+        c.gridx=2;
+        c.gridheight = 2;
+        c.anchor = GridBagConstraints.LINE_END;
+        armyPointsPanel = new ArmyPointsLabels();
+        this.add(armyPointsPanel, c);
     }
 
     public BuildingsPanel getBuildingsPanel() {
@@ -84,5 +89,9 @@ public class RightOponentPanel extends JPanel{
 
     public SciencePanel getSciencePanel() {
         return sciencePanel;
+    }
+
+    public ArmyPointsLabels getArmyPointsLabels() {
+        return armyPointsPanel;
     }
 }

@@ -1,4 +1,4 @@
-package gui.playerPanel;
+package gui.playerPanel.wonderPanel.sidePanels;
 
 import cards.Card;
 import cards.Science;
@@ -9,7 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class SciencePanel extends JPanel implements ShowCardOnIcon{
+public class SciencePanel extends JPanel implements ShowCardOnIcon {
     private ScienceIconsPanel mathPanel = new ScienceIconsPanel();
     private ScienceIconsPanel scriptPanel = new ScienceIconsPanel();
     private ScienceIconsPanel mechaPanel = new ScienceIconsPanel();

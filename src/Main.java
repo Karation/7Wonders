@@ -61,7 +61,7 @@ public class Main {
 
     private void createBoardAndPlayers() {
         for (int i = 0; i < numOfPlayers; i++) {
-            Player player = new Player();
+            Player player = new Player(String.valueOf(i));
             players.add(player);
         }
         board = new Board(players);

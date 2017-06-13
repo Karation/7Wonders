@@ -1,4 +1,4 @@
-package gui;
+package gui.playerPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +9,7 @@ public class CanBuildPanel extends JPanel{
     public CanBuildPanel() {
         model = new DefaultListModel<>();
         JScrollPane pane = new JScrollPane();
-        JList jList = new JList(model);
+        JList<String> jList = new JList<>(model);
 
         setOpaque(false);
 

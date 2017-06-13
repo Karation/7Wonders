@@ -1,6 +1,9 @@
-package gui.playerPanel;
+package gui.playerPanel.wonderPanel.sidePanels;
 
 
+import gui.playerPanel.wonderPanel.sidePanels.insidePanels.GuildPanel;
+import gui.playerPanel.wonderPanel.sidePanels.insidePanels.TradePanel;
+import gui.playerPanel.wonderPanel.sidePanels.insidePanels.WonderBuildPanel;
 import wonders.Wonders;
 
 import javax.swing.*;

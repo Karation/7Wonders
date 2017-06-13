@@ -1,7 +1,7 @@
-package gui.playerPanel;
+package gui.playerPanel.wonderPanel;
 
 
-import gui.ArmyPointsPanel;
+import gui.playerPanel.wonderPanel.sidePanels.*;
 import wonders.Wonders;
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +15,7 @@ public class WonderPanel extends JPanel{
     private SciencePanel sciencePanel;
 
 
-    WonderPanel(Wonders wonder) throws IOException {
+    public WonderPanel(Wonders wonder) throws IOException {
         this.setOpaque(false);
         this.setBorder(null);
         setLayout(new GridBagLayout());

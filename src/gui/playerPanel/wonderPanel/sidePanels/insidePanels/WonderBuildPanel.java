@@ -1,4 +1,4 @@
-package gui.playerPanel;
+package gui.playerPanel.wonderPanel.sidePanels.insidePanels;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -14,7 +14,7 @@ public class WonderBuildPanel extends JPanel{
     private JLabel stage3;
     private JLabel stage4;
     private BufferedImage builtImage = ImageIO.read(new File("Icons\\okey.png"));
-    WonderBuildPanel(int wonderStages) throws IOException {
+    public WonderBuildPanel(int wonderStages) throws IOException {
         this.setOpaque(false);
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         this.setBorder(null);

@@ -1,25 +1,29 @@
 package gui.playerPanel;
 
+import chat.ChatListener;
+import chat.ChatSession;
+import chat.ChatWindow;
+import chat.SimpleMessage;
 import player.Player;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ChatPanel extends JPanel {
-    //JTextArea chatBox;
-    ChatBox chatBox;
-    JTextField messageBox;
-    JButton sendMessage;
-    String username;
-    ArrayList<Player> players;
 
-    public ChatPanel(ArrayList<Player> players) {
+    private ChatListener chatListener;
+    private JTextField messageBox;
+    private JButton sendMessage;
+    private ChatSession chatSession;
+    private Player player;
+    private JScrollPane jScrollPane;
 
-        this.players = players;
+    public ChatPanel(Player player, ChatSession chatSession) {
+        this.player = player;
+        this.chatSession = chatSession;
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
@@ -33,14 +37,10 @@ public class ChatPanel extends JPanel {
         sendMessage = new JButton("Send");
         sendMessage.addActionListener(new sendMessageButtonListener());
 
-//        chatBox = new JTextArea();
-//        chatBox.setEditable(false);
-//        chatBox.setFont(new Font("Serif", Font.PLAIN, 12));
-//        chatBox.setLineWrap(true);
-//        mainPanel.add(new JScrollPane(chatBox), BorderLayout.CENTER);
-        chatBox = ChatBox.getInstance();
-        ChatScrollPane chatScrollPane = ChatScrollPane.getInstance(chatBox);
-        mainPanel.add(chatScrollPane, BorderLayout.CENTER);
+        chatListener = new ChatWindow();
+        jScrollPane = new JScrollPane((ChatWindow) chatListener);
+
+        mainPanel.add(jScrollPane, BorderLayout.CENTER);
 
 
         GridBagConstraints left = new GridBagConstraints();
@@ -63,79 +63,27 @@ public class ChatPanel extends JPanel {
         mainPanel.add(BorderLayout.SOUTH, southPanel);
 
         this.add(mainPanel);
-        //this.setLayout(new BorderLayout());
-        //this.setSize(470, 300);
         this.setVisible(true);
         this.setBorder(null);
 
+        registerChatWindow();
+    }
+
+    private void registerChatWindow() {
+        chatSession.register((ChatWindow) chatListener);
     }
 
     class sendMessageButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             if (messageBox.getText().length() < 1) {
                 // do nothing
-            } else if (messageBox.getText().equals(".clear")) {
-                chatBox.setText("Cleared all messages\n");
+            }else {
+                SimpleMessage simpleMessage = new SimpleMessage("<" + player.getName() + ">" + messageBox.getText());
+                chatSession.incomingMessage(1, simpleMessage);
                 messageBox.setText("");
-            } else {
-                for (Player player : players) {
-                    chatBox.append("<" + username + ">:  " + messageBox.getText() + "\n");
-                }
-                messageBox.setText("");
-                System.out.println(chatBox.getText());
             }
-            messageBox.requestFocusInWindow();
-
         }
     }
 }
 
-class ChatScrollPane extends JScrollPane {
-    private static ChatScrollPane instance = null;
-
-    private ChatScrollPane(ChatBox chatBox) {
-    }
-
-    public static ChatScrollPane getInstance(ChatBox chatBox) {
-        if (instance == null) {
-            synchronized (ChatScrollPane.class) {
-                if (instance == null)
-                    instance = createChatScrollPane(chatBox);
-            }
-        }
-        return instance;
-    }
-
-    private static ChatScrollPane createChatScrollPane(ChatBox chatBox) {
-        instance = new ChatScrollPane(chatBox);
-        return instance;
-    }
-}
-
-class ChatBox extends JTextArea {
-    private static ChatBox instance = null;
-
-    private ChatBox() {
-    }
-
-    public static ChatBox getInstance() {
-        if (instance == null) {
-            synchronized (ChatBox.class) {
-                if (instance == null) {
-                    instance = createChatBox();
-                }
-            }
-        }
-        return instance;
-    }
-
-    private static ChatBox createChatBox() {
-        instance = new ChatBox();
-        instance.setEditable(false);
-        instance.setFont(new Font("Serif", Font.PLAIN, 12));
-        instance.setLineWrap(true);
-
-        return instance;
-    }
-}
 

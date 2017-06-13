@@ -84,7 +84,6 @@ public class Deck {
                     scan.nextLine();
                 }
             }
-            //scan.close();
         } catch (IOException io) {
             System.out.println("File not found");
         } finally {

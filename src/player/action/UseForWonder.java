@@ -2,7 +2,7 @@ package player.action;
 
 import cards.Card;
 import effects.*;
-import gui.playerPanel.WonderBuildPanel;
+import gui.playerPanel.wonderPanel.sidePanels.insidePanels.WonderBuildPanel;
 import player.Player;
 import wonders.WonderStage;
 

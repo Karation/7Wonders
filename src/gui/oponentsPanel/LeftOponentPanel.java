@@ -1,9 +1,6 @@
 package gui.oponentsPanel;
 
-import gui.playerPanel.BuildingsPanel;
-import gui.playerPanel.MainWonderPanel;
-import gui.playerPanel.ResourcesPanel;
-import gui.playerPanel.SciencePanel;
+import gui.playerPanel.wonderPanel.sidePanels.*;
 import player.Player;
 
 import javax.swing.*;
@@ -14,8 +11,11 @@ public class LeftOponentPanel extends JPanel{
     private BuildingsPanel buildingsPanel;
     private SciencePanel sciencePanel;
     private MainWonderPanel mainWonderPanel;
+    private ArmyPointsLabels armyPointsPanel;
     private BuyPanel buyPanel;
+
     LeftOponentPanel(Player leftOpponent, Player player){
+
         this.setOpaque(false);
         this.setLayout(new GridBagLayout());
         this.setBorder(null);
@@ -30,6 +30,13 @@ public class LeftOponentPanel extends JPanel{
         ImageIcon wonderIcon = new ImageIcon(leftOpponent.getWonder().getImagePath());
         JLabel wonderPicture=new JLabel(wonderIcon);
         this.add(wonderPicture, c);
+
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridheight=2;
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        armyPointsPanel = new ArmyPointsLabels();
+        this.add(armyPointsPanel, c);
 
         c.gridx=0;
         c.gridy=2;
@@ -86,5 +93,9 @@ public class LeftOponentPanel extends JPanel{
 
     public SciencePanel getSciencePanel() {
         return sciencePanel;
+    }
+
+    public ArmyPointsLabels getArmyPointsLabels() {
+        return armyPointsPanel;
     }
 }

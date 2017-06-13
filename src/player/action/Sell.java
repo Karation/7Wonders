@@ -1,8 +1,8 @@
 package player.action;
 
 import cards.Card;
-import gui.playerPanel.BuildingsPanel;
-import gui.playerPanel.WonderPanel;
+import gui.playerPanel.wonderPanel.sidePanels.BuildingsPanel;
+import gui.playerPanel.wonderPanel.WonderPanel;
 import player.Player;
 
 import java.util.ArrayList;

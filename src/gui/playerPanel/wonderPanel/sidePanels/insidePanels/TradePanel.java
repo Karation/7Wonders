@@ -1,15 +1,16 @@
-package gui.playerPanel;
+package gui.playerPanel.wonderPanel.sidePanels.insidePanels;
 
 import cards.Card;
+import gui.playerPanel.wonderPanel.sidePanels.ShowCardOnIcon;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class TradePanel extends JPanel implements ShowCardOnIcon{
+public class TradePanel extends JPanel implements ShowCardOnIcon {
     private GridBagConstraints c = new GridBagConstraints();
-    TradePanel(){
+    public TradePanel(){
         this.setOpaque(false);
         this.setBorder(null);
         this.setLayout(new GridBagLayout());

@@ -1,4 +1,4 @@
-package gui.playerPanel;
+package gui.playerPanel.wonderPanel.sidePanels;
 
 import cards.Card;
 import cards.Good;
@@ -10,7 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class ResourcesPanel  extends JPanel implements ShowCardOnIcon{
+public class ResourcesPanel  extends JPanel implements ShowCardOnIcon {
     private JPanel resourcesPanel;
     private JPanel goodsPanel;
     public ResourcesPanel(){
@@ -25,14 +25,14 @@ public class ResourcesPanel  extends JPanel implements ShowCardOnIcon{
         resourcesPanel = new JPanel();
         goodsPanel = new JPanel();
 
-        resourcesPanel.setLayout(new GridLayout());
+        resourcesPanel.setLayout(new BoxLayout(resourcesPanel, BoxLayout.X_AXIS));
         resourcesPanel.setOpaque(false);
         resourcesPanel.setBorder(null);
         this.add(resourcesPanel, c);
 
         c.gridx++;
         c.anchor = GridBagConstraints.LINE_END;
-        goodsPanel.setLayout(new GridLayout());
+        goodsPanel.setLayout(new BoxLayout(goodsPanel, BoxLayout.X_AXIS));
         goodsPanel.setOpaque(false);
         goodsPanel.setBorder(null);
         this.add(goodsPanel, c);
@@ -43,11 +43,11 @@ public class ResourcesPanel  extends JPanel implements ShowCardOnIcon{
     }
     public void addResourceIcon(String resourceName, Resource resource){
         JLabel resourceIcon = new JLabel();
-        resourceIcon.setIcon(new ImageIcon("Icons\\"+resourceName+".jpg"));
+        ImageIcon icon = new ImageIcon("Icons\\"+resourceName+".jpg");
+        resourceIcon.setIcon(icon);
         resourceIcon.setOpaque(false);
         resourceIcon.setBorder(null);
-        resourceIcon.setSize(50,50);
-        resourceIcon.setLocation(0,0);
+        //resourceIcon.setLocation(0,0);
 
         MouseAdapter mouseAdapter = showCardsImage(resource);
         resourceIcon.addMouseListener(mouseAdapter);

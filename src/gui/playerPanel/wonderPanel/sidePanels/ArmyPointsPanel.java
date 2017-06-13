@@ -1,4 +1,4 @@
-package gui;
+package gui.playerPanel.wonderPanel.sidePanels;
 
 import javax.swing.*;
 import java.awt.*;
